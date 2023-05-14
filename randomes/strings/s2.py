@@ -7,29 +7,29 @@ from functools import reduce
 from collections import Counter
 
 
-def func1(a: str, b: str) -> bool:
+def is_bility1(a: str, b: str) -> bool:
     """Проверяет, можно ли составить из первой строки вторую,
     используя только данное кол-во каждого символа из первой строки."""
     return reduce(lambda a, b: a & b == b, map(Counter, (a, b)))
 
 
-def func2(a: str, b: str) -> bool:
+def is_bility2(a: str, b: str) -> bool:
     """Проверяет, можно ли составить из первой строки вторую,
     используя любое кол-во каждого символа из первой строки."""
     return reduce(lambda a, b: b <= a, map(set, (a, b)))
 
 
-def func3(a: str, b: str) -> bool:
+def is_bility3(a: str, b: str) -> bool:
     """Проверяет, можно ли составить из первой строки вторую,
     используя только данное кол-во каждого символа из первой строки,
     без использования библиотек. Функционально аналогична func1."""
-    for k, v in rcount(b).items():
-        if not (k := rcount(a).get(k)) or min(k, v) != v:
+    for k, v in count_ident(b).items():
+        if not (k := count_ident(a).get(k)) or min(k, v) != v:
             return False
     return True
 
 
-def rcount(string: str) -> dict[str, int]:
+def count_ident(string: str) -> dict[str, int]:
     """Подсчитывает кол-во одинаковых символов в строке."""
     result = {}
     for char in string:
@@ -49,11 +49,11 @@ def test() -> None:
     ]
 
     for args, value in data_1:
-        assert func1(*args) == value
-        assert func3(*args) == value
+        assert is_bility1(*args) == value
+        assert is_bility3(*args) == value
 
     for args, value in data_2:
-        assert func2(*args) == value
+        assert is_bility2(*args) == value
 
 
 if __name__ == '__main__':

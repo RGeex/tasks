@@ -29,7 +29,7 @@ def get_val(N: int) -> tuple:
     return a, b
 
 
-def func(*args) -> int:
+def pal_max(*args) -> int:
     """Поиск самого большого палиндрома N-значных чисел."""
     return reduce(lambda a, b: a * b, get_val(*args))
 
@@ -37,9 +37,9 @@ def func(*args) -> int:
 def test() -> None:
     """Тестирование работы алгоритмов."""
     assert get_val(2) == (99, 91)
-    assert func(2) == 9009
+    assert pal_max(2) == 9009
     assert get_val(3) == (993, 913)
-    assert func(3) == 906609
+    assert pal_max(3) == 906609
 
 
 if __name__ == '__main__':

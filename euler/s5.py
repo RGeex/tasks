@@ -6,7 +6,7 @@
 """
 
 
-def func(N: int) -> int:
+def finds_num(N: int) -> int:
     """Поиск минимального числа, которое делится без остатка на все числа
     от 1 до N"""
     num = 0
@@ -21,8 +21,8 @@ def func(N: int) -> int:
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    assert func(10) == 2520
-    assert func(20) == 232792560
+    assert finds_num(10) == 2520
+    assert finds_num(20) == 232792560
 
 
 if __name__ == '__main__':

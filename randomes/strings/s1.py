@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Generator
 
 
-def get_num(filename: Path) -> str | None:
+def get_num_from_file(filename: Path) -> str | None:
     """Считывает первую строку из файла."""
     if filename.exists() and filename.is_file():
         with open(filename, 'r', encoding='UTF-8') as file:
@@ -18,7 +18,7 @@ def get_num(filename: Path) -> str | None:
     return None
 
 
-def zp(*args: str) -> Generator:
+def zip_from_end(*args: str) -> Generator:
     """Возвращает по 1 элементу из каждого переданного итерированного
     объекта. Функция аналогична по своему действию zip_longest из модуля
     itertools, только извлекает элементы с конца последовательности.
@@ -27,21 +27,21 @@ def zp(*args: str) -> Generator:
         yield list(map(lambda x, i=i: x[-i] if len(x) >= i else '0', args))
 
 
-def func(*values: str) -> str:
+def stacking(*values: str) -> str:
     """Складывает числа посимвольно с конца числа. Возвращает
     результат сложения в виде строки."""
     tmp, res = [], ''
-    for i in zp(*values):
+    for i in zip_from_end(*values):
         *tmp, data = str(sum(map(int, i + tmp)))
         res = data + res
     return str(*tmp) + res
 
 
-def main(filenames: list[Path]) -> str:
+def stacking_from_files(filenames: list[Path]) -> str:
     """Получает имена файлов, по ним из этих файлов извлекает числа и
     передает в функцию для их сложения. Возвращает получившееся число
     в виде строки."""
-    return func(*map(get_num, filenames))
+    return stacking(*map(get_num_from_file, filenames))
 
 
 def test() -> None:
@@ -53,7 +53,7 @@ def test() -> None:
         ('0', '0'),
     ]
     for nums in data:
-        assert str(sum(map(int, nums))) == func(*nums)
+        assert str(sum(map(int, nums))) == stacking(*nums)
 
 
 if __name__ == '__main__':

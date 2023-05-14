@@ -30,7 +30,7 @@ def get_fib_lst(num: int, *_, limit: bool = False):
     return lst
 
 
-def func(*args, **kwargs):
+def sums(*args, **kwargs):
     """Подсчитывает сумму всех четных элементов ряда Фибоначчи."""
     return sum(i for i in get_fib_lst(*args, **kwargs) if not i % 2)
 
@@ -39,7 +39,7 @@ def test() -> None:
     """Тестирование работы алгоритмов."""
     assert get_fib_lst(10) == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     assert get_fib_lst(22, limit=True) == [1, 2, 3, 5, 8, 13, 21]
-    assert func(4_000_000, limit=True) == 4613732
+    assert sums(4_000_000, limit=True) == 4613732
 
 
 if __name__ == '__main__':

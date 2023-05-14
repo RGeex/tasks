@@ -12,27 +12,35 @@
 """
 
 
-def func1(lst1: list[int]) -> list[int]:
+def get_sorts_pow(lst1: list[int]) -> list[int]:
     """Создает отсортированный список квадратов, отсортированного списка."""
-    res = []
-    indx = [0, -(len(lst1) - 1)]
+    result = []
+    indexs = [0, -(len(lst1) - 1)]  # индексы первого и последнего элементов
     for _ in range(len(lst1)):
-        num1, num2 = map(abs, (lst1[indx[0]], lst1[abs(indx[1])]))
-        res.append(max(num1, num2) ** 2)
-        indx[num1 <= num2] += 1
-    return res[::-1]
+        # по индексам извлекаем абсолютное значение из списка
+        num1, num2 = map(abs, (lst1[indexs[0]], lst1[abs(indexs[1])]))
+        # записываем максимальное значение в квадрате
+        result.append(max(num1, num2) ** 2)
+        # двигаем индекс большего числа
+        indexs[num1 <= num2] += 1
+    return result[::-1]
 
 
-def func2(lst2: list[int], num: int) -> list[int]:
+def get_slice_max(lst2: list[int], num: int) -> list[int]:
     """Создает список максимальных значений срезов заданной длины пошагово."""
     return [max(lst2[i:i + num]) for i in range(len(lst2) - num + 1)]
 
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    lst = [-5, -2, 0, 1, 2, 3, 4]
-    assert func1(lst) == [0, 1, 4, 4, 9, 16, 25]
-    assert func2(lst, 3) == [0, 1, 2, 3, 4]
+    lst1 = [-5, -2, 0, 1, 2, 3, 4]
+    lst2 = get_sorts_pow(lst1)
+    lst3 = get_slice_max(lst1, 3)
+    lst4 = [0, 1, 4, 4, 9, 16, 25]
+    lst5 = [0, 1, 2, 3, 4]
+
+    assert lst2 == lst4
+    assert lst3 == lst5
 
 
 if __name__ == '__main__':

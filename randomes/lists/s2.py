@@ -30,7 +30,7 @@ def get_primes_list(num: int) -> list:
     return primes
 
 
-def func(num: int) -> list:
+def get_sum_is_prime_lst(num: int) -> list:
     """Распределяет числа от 1 до num по парам чисел,
     сумма которых простое число."""
 
@@ -52,8 +52,13 @@ def func(num: int) -> list:
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    assert func(9) == [[1, 2], [3, 4], [5, 6], [8, 9]]
-    assert func(10) == [[1, 2], [3, 4], [5, 6], [7, 10], [8, 9]]
+    lst1 = [[1, 2], [3, 4], [5, 6], [8, 9]]
+    lst2 = [[1, 2], [3, 4], [5, 6], [7, 10], [8, 9]]
+    lst3 = get_sum_is_prime_lst(9)
+    lst4 = get_sum_is_prime_lst(10)
+
+    assert lst1 == lst3
+    assert lst2 == lst4
 
 
 if __name__ == '__main__':

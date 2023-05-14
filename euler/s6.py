@@ -13,7 +13,7 @@
 """
 
 
-def func(N: int) -> int:
+def diff(N: int) -> int:
     """Поиск разности между суммой квадратом суммы и суммы квадратов чисел
     от 1 до N"""
     a = sum(i*i for i in range(1, N + 1))
@@ -23,8 +23,8 @@ def func(N: int) -> int:
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    assert func(10) == 2640
-    assert func(100) == 25164150
+    assert diff(10) == 2640
+    assert diff(100) == 25164150
 
 
 if __name__ == '__main__':

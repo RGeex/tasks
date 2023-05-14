@@ -7,15 +7,15 @@
 """
 
 
-def func(num: int) -> int:
+def multiples(num: int) -> int:
     """Сумма чисел < num, кратные 3 или 5."""
     return sum(i for i in range(1, num) if not i % 3 or not i % 5)
 
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    assert func(10) == 23
-    assert func(1000) == 233168
+    assert multiples(10) == 23
+    assert multiples(1000) == 233168
 
 
 if __name__ == '__main__':

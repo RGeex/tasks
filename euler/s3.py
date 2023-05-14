@@ -34,7 +34,7 @@ def get_div_num(num: int) -> list:
     return result
 
 
-def func(*args) -> int:
+def dvrs(*args) -> int:
     """Поиск максимального делителя числа N, являющегося простым числом."""
     return max(get_div_num(*args))
 
@@ -42,7 +42,7 @@ def func(*args) -> int:
 def test() -> None:
     """Тестирование работы алгоритмов."""
     assert get_div_num(13195) == [5, 7, 13, 29]
-    assert func(600851475143) == 6857
+    assert dvrs(600851475143) == 6857
 
 
 if __name__ == '__main__':

@@ -21,7 +21,7 @@ def primeses() -> Generator:
             yield num
 
 
-def func(N: int) -> int:
+def pop_prime(N: int) -> int:
     """Поиск простого числа по его порядковому номеру в списке
     простых чисел"""
     primes = primeses()
@@ -32,8 +32,8 @@ def func(N: int) -> int:
 
 def test() -> None:
     """Тестирование работы алгоритмов."""
-    assert func(6) == 13
-    assert func(10001) == 104743
+    assert pop_prime(6) == 13
+    assert pop_prime(10001) == 104743
 
 
 if __name__ == '__main__':
