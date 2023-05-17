@@ -31,9 +31,6 @@ def triangle_num() -> Generator:
         yield num * (num - 1) // 2
 
 
-find = 500
-
-
 def get_num_triangle_limit_dividers(dividers: int) -> int | None:
     """Поиск треугольного числа с более N делителей."""
     if dividers:
