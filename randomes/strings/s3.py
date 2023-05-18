@@ -19,17 +19,14 @@
 
 def likes(names: list) -> str:
     """Распределение подсказок для лайков по шаблону."""
-    res = []
-
-    pnt, ln = 2 - (len(names) == 2), len(names)
-    res.append(', '.join(names[0:pnt]))
-    res.append(''.join(names[pnt:pnt + 1]) if ln < 4 else f'{ln - 2} others')
-
-    res = ' and '.join(list(filter(None, res)))
-
-    return ' '.join((
-        ["no one", res][bool(names)],
-        f'like{["s", ""][ln > 1]} this'))
+    n = len(names)
+    return {
+        0: 'no one likes this',
+        1: '{} likes this',
+        2: '{} and {} like this',
+        3: '{}, {} and {} like this',
+        4: '{}, {} and {others} others like this',
+    }[min(4, n)].format(*names[:3], others=n-2)
 
 
 def test() -> None:
