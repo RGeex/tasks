@@ -11,7 +11,7 @@
 """
 
 
-def sum_of_intervals(intervals):
+def sum_of_intervals(intervals: list[tuple]) -> int:
     """Подсчитывает сумму интервалов, исключая пересечения."""
     res, cur = 0, float("-inf")
     for a, b in sorted(intervals):

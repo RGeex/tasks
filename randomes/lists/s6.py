@@ -7,7 +7,7 @@
 """
 
 
-def find_outlier(integers: list):
+def find_outlier(integers: list) -> int:
     """Поиск числа отличающегося по четности от остальных."""
     val = int(sum(i % 2 for i in integers[:3]) > 1)
     return next(n for n in integers if n % 2 != val)
