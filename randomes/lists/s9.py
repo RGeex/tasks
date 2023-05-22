@@ -16,13 +16,13 @@ max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])
 
 def max_sequence(arr: list) -> int:
     """Поиск максимальной суммы подмассива."""
-    cur, res = float('-inf'), []
-    for i, v in enumerate(arr, 1):
-        cur = v if cur + v < v else cur + v
-        if cur > cur - v or len(arr) == i:
-            res.append(cur)
+    cur, res = 0, 0
+    for x in arr:
+        cur += x
+        cur = max(cur, 0)
+        res = max(cur, res)
 
-    return max(res) if res and max(res) > 0 else 0
+    return res if arr and res > 0 else 0
 
 
 def test() -> None:
