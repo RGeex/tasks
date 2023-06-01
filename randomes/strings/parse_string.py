@@ -7,11 +7,13 @@
 '+', '-', '*', '/', а так же скобки и унарный '-'.
 """
 
+import re
 import ast
 import operator
+from functools import reduce
 
 
-def calc(expression: str):
+def calc1(expression: str):
     """Вычисляет математическое выражение в строке."""
 
     binops = {
@@ -43,6 +45,53 @@ def calc(expression: str):
     return int(result) if result.is_integer() else result
 
 
+def calc2(expression: str) -> int | float:
+    """Вычисляет математическое выражение в строке."""
+    binops = {
+        '-': operator.sub,
+        '+': operator.add,
+        '*': operator.mul,
+        '/': operator.truediv,
+    }
+
+    ops = '\\'.join([' ', *binops]).strip()
+
+    def _eval(node: str) -> float:
+        """Парсит строку и производит вычисления."""
+
+        # замена подряд идущих знаков "+" и "-" на один
+        for i, val in enumerate(['+-', '--']):
+            node = node.replace(val, ['-', '+'][i])
+
+        # раскрытие скобок в выражении
+        if re.search(r'[\(\)]', node):
+            tmp = {'(': 0, ')': 0}
+
+            # поиск парной скобки
+            for i, v in enumerate(node):
+                if tmp.get(v) is not None:
+                    tmp[0] = tmp.get(0, i)
+                    tmp[v] += 1
+                if reduce(lambda a, b: a and a == b, list(tmp.values())[:2]):
+                    break
+
+            return _eval(''.join([
+                f'{node[:tmp[0]]}',
+                f'{_eval(node[tmp[0]+1:i])}',
+                f'{node[i+1:]}',
+            ]))
+
+        # вычисление выражения
+        for i in range(0, 8, 4):
+            if len(sch := re.split(f'(?<=\d)([{ops[i:i+4]}])', node)) > 1:
+                return binops[sch[-2]](*map(_eval, (''.join(sch[:-2]), sch[-1])))
+
+        return float(node)
+
+    result = _eval("".join(expression.split()))
+    return int(result) if result.is_integer() else result
+
+
 def test() -> None:
     """Тестирование работы алгоритмов."""
     cases = (
@@ -57,7 +106,8 @@ def test() -> None:
     )
 
     for case, val in cases:
-        assert calc(case) == val
+        assert calc1(case) == val
+        assert calc2(case) == val
 
 
 if __name__ == '__main__':
