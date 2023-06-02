@@ -52,6 +52,7 @@ def test() -> None:
         ('987', '0'),
         ('0', '0'),
     ]
+
     for nums in data:
         assert str(sum(map(int, nums))) == stacking(*nums)
 
