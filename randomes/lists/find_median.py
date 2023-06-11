@@ -8,25 +8,22 @@
 """
 
 
-def median(a: list, b: list):
-    """Поиск медианного значения двух списков."""
+def median(*args: list):
+    """Поиск медианного значения отсортированных списков."""
 
-    # общая длина двух списков
-    lnx = sum(map(len, (a, b)))
-    # искомые индексы элементов
+    # общая длина списков
+    lnx = sum(map(len, args))
+    # индексы элементов, которые нужно найти
     ndx = {(x := lnx // 2), x - int(not lnx % 2)}
     # результирующий список и стартовые индексы списков
-    res, m, n = [], 0, 0
+    res, inx = [], [0] * len(args)
 
     while len(res) < len(ndx):
-        if len(a) > m and a[m] < b[n]:
-            tmp = a[m]
-            m += 1
-        else:
-            tmp = b[n]
-            n += 1
-        if m + n - 1 in ndx:
-            res.append(tmp)
+        # минимальное значение среди списков
+        tmp = min((args[i][val], i) for i, val in enumerate(inx) if len(args[i]) > val)
+        if sum(inx) in ndx:
+            res.append(tmp[0])
+        inx[tmp[1]] += 1
 
     res = sum(res) / len(res)
     return int(res) if res.is_integer() else res
