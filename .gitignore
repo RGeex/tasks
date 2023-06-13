@@ -4,5 +4,6 @@ venv/*
 
 Pipfile*
 .config
+.env
 *.pyc
 *.log
