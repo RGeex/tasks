@@ -36,7 +36,7 @@ from functools import reduce
 from operator import add
 
 
-def dupe_detect(functions):
+def dupe_detect(functions: callable) -> list:
     """Поиск дубликатов функций имеющих одинаковую задачу."""
     temp = {}
     for i, func in enumerate(functions):
