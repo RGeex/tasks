@@ -29,10 +29,10 @@
 
 def get_lcm(arr: list) -> int:
     """Поиск наименьшего общего кратного"""
-    num = -1 + (s := [1, 0][any(not i % 2 for i in arr)])
+    num = -1
     while True:
         num += 1
-        val = (int(not num - s) or num) * arr[-1]
+        val = (int(not num) or num) * arr[-1]
         if all(not val % x for x in arr):
             return val
 
