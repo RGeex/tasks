@@ -7,7 +7,7 @@
 from operator import eq
 
 
-def xo(s: str):
+def xo(s: str) -> bool:
     """Поиск в строке 'x' и 'o', сравнение их колличеств."""
     return eq(*[s.lower().count(i) for i in 'xo'])
 
