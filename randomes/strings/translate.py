@@ -30,10 +30,11 @@ def translation(text: str) -> str:
     # буквы Английского алфавита
     chrs = list(map(chr, range(97, 123)))
     # словарь букв с точками
-    data = {v: func((i//5+1, i % 5+1)) for i, v in enumerate(chrs[:10]+chrs[11:])}
+    data = {v: func((i//5+1, i % 5+1))
+            for i, v in enumerate(chrs[:10]+chrs[11:])}
     data['k'] = data['c']
 
-    return ' '.join(map(data.get, text.lower()))
+    return ' '.join(data.get(x, '') for x in text.lower())
 
 
 def test() -> None:
