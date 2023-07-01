@@ -13,7 +13,7 @@ import operator
 from functools import reduce
 
 
-def calc1(expression: str):
+def calc1(expression: str) -> int | float:
     """Вычисляет математическое выражение в строке."""
 
     binops = {
