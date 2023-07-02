@@ -1,3 +1,7 @@
+"""
+Алгоритм решает судоку методом перебора значений.
+"""
+
 from operator import add
 from functools import reduce
 

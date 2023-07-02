@@ -5,7 +5,7 @@
 
 
 def sort_array(source_array: list) -> list:
-    """Возвращает исходный список с отсортированными тлько не четными числами,
+    """Возвращает исходный список с отсортированными только не четными числами,
     четные остаются на своих местах без изменений."""
     tmp = iter(sorted(i for i in source_array if i % 2))
     return [next(tmp) if i % 2 else i for i in source_array]
