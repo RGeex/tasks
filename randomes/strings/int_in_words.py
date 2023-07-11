@@ -8,7 +8,7 @@
 """
 
 
-def parse_int(string: str):
+def parse_int(string: str) -> int:
     """Преобразование строки в число."""
 
     ref = {

@@ -4,7 +4,7 @@
 """
 
 
-def alternate_case(s: str):
+def alternate_case(s: str) -> str:
     """Реализация swapcase"""
     return ''.join([x.lower(), x.upper()][x.islower()] for x in s)
 
