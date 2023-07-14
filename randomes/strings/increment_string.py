@@ -31,12 +31,18 @@ def stacking(*values: str) -> str:
     return str(*tmp) + res
 
 
-def increment_string(strng: str) -> str:
+def increment_string1(strng: str) -> str:
     """Обновление имени, увеличивая на 1 цифровое окончание или добавляя его."""
-    s = re.search(r'\d+$', strng)
-    x = s and strng[:s.span()[0]] or strng
+    a, b = re.split(r'(\d+)?$', strng)[:2]
+    return a + stacking(b or '0', '1')
 
-    return x + stacking(s.group() if s else '0', '1')
+
+def increment_string2(strng: str) -> str:
+    head = strng.rstrip('0123456789')
+    tail = strng[len(head):]
+    if tail == "":
+        return strng + "1"
+    return head + str(int(tail) + 1).zfill(len(tail))
 
 
 def test() -> None:
@@ -44,6 +50,7 @@ def test() -> None:
 
     data = (
         ("", "1"),
+        ("669", "670"),
         ("foo", "foo1"),
         ("foobar1", "foobar2"),
         ("foobar00", "foobar01"),
@@ -54,7 +61,8 @@ def test() -> None:
     )
 
     for key, val in data:
-        assert increment_string(key) == val
+        assert increment_string1(key) == val
+        assert increment_string2(key) == val
 
 
 if __name__ == '__main__':
