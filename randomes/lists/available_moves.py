@@ -5,7 +5,16 @@
 """
 
 
-def available_moves(pos: str) -> list:
+def is_valid(pos: str) -> tuple | bool:
+    """Проверяет валидность начальной позиции фигуры."""
+    if isinstance(pos, str) and len(pos) == 2:
+        x, y = int(pos[1]) - 1, ord(pos[0]) % 65
+        if all(x in range(8) for x in (x, y)):
+            return (x, y)
+    return False
+
+
+def available_moves1(pos: str) -> list:
     """Поиск всех возможных ходов ферзя с заданной позиции."""
     res = set()
     if isinstance(pos, str) and len(pos) == 2:
@@ -20,6 +29,20 @@ def available_moves(pos: str) -> list:
                 m, n = [v - min(a, k) for v in (a, k)]
                 res |= {(m + v, abs(7 * x - (n + v))) for v in range(8-max(m, n))}
             res = [f'{chr(b+65)}{a+1}' for a, b in res - {(a, b)}]
+    return sorted(res)
+
+
+def available_moves2(pos: str) -> list:
+    """Поиск всех возможных ходов ферзя с заданной позиции."""
+    res = []
+    if isinstance(pos, str) and len(pos) == 2:
+        x, y = int(pos[1]) - 1, ord(pos[0]) % 65
+        if all(x in range(8) for x in (x, y)):
+            # solution
+            for a in range(8):
+                for b in range(8):
+                    if (a, b) != (x, y) and (abs(a - x) == abs(b - y) or a == x or b == y):
+                        res.append(f'{chr(b+65)}{a+1}')
     return sorted(res)
 
 
@@ -42,7 +65,8 @@ def test() -> None:
         [2, []],
     )
     for key, val in data:
-        assert available_moves(key) == val
+        assert available_moves1(key) == val
+        assert available_moves2(key) == val
 
 
 if __name__ == '__main__':
