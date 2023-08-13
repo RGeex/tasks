@@ -5,15 +5,6 @@
 """
 
 
-def is_valid(pos: str) -> tuple | bool:
-    """Проверяет валидность начальной позиции фигуры."""
-    if isinstance(pos, str) and len(pos) == 2:
-        x, y = int(pos[1]) - 1, ord(pos[0]) % 65
-        if all(x in range(8) for x in (x, y)):
-            return (x, y)
-    return False
-
-
 def available_moves1(pos: str) -> list:
     """Поиск всех возможных ходов ферзя с заданной позиции."""
     res = set()
