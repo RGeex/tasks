@@ -13,11 +13,11 @@ def spiral_from_center(size: int) -> list:
     dx, dy, x, y = 0, 1, size // 2, size // 2
     for value in range(size**2):
         matrix[x][y] = value + 1
-        if not matrix[x+dy][y-dx]:
+        if value and not matrix[x+dy][y-dx]:
             dx, dy = dy, -dx
         x += dx
         y += dy
-    return list(map(list, list(zip(*matrix))[::-1]))
+    return matrix
 
 
 def display(size: int) -> None:
