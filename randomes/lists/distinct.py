@@ -10,13 +10,20 @@ def distinct(seq: list[int]) -> list[int]:
     return sorted(set(seq), key=seq.index)
 
 
-data = (
-    ([1], [1]),
-    ([1, 2], [1, 2]),
-    ([1, 1, 2], [1, 2]),
-    ([1, 1, 1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
-    ([1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 7, 7], [1, 2, 3, 4, 5, 6, 7]),
-)
+def test() -> None:
+    """Тестирование работы алгоритмов."""
 
-for key, val in data:
-    assert distinct(key) == val
+    data = (
+        ([1], [1]),
+        ([1, 2], [1, 2]),
+        ([1, 1, 2], [1, 2]),
+        ([1, 1, 1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+        ([1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 7, 7], [1, 2, 3, 4, 5, 6, 7]),
+    )
+
+    for key, val in data:
+        assert distinct(key) == val
+
+
+if __name__ == '__main__':
+    test()
