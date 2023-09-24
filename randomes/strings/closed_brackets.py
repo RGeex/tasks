@@ -16,7 +16,7 @@
 """
 
 
-def closed_brackets(s: str, c: int = 0) -> bool:
+def closed_brackets1(s: str, c: int = 0) -> bool:
     """
     Поиск парных скобок + Jocker.
     """
@@ -26,9 +26,22 @@ def closed_brackets(s: str, c: int = 0) -> bool:
                 c += 1 if x == '(' else -1
                 continue
             for k in (-1, 1):
-                if closed_brackets(s[i:], c + k):
+                if closed_brackets1(s[i:], c + k):
                     return True
     return not c
+
+
+def closed_brackets2(s: str) -> bool:
+    """
+    Поиск парных скобок + Jocker.
+    """
+    a, b = 0, 0
+    for c in s:
+        if c == ')' and not b:
+            return False
+        a = a+1 if c == '(' else a and a-1
+        b = b-1 if c == ')' else b+1
+    return not a
 
 
 def test() -> None:
@@ -49,7 +62,8 @@ def test() -> None:
     )
 
     for key, val in data:
-        assert closed_brackets(key) == val
+        assert closed_brackets1(key) == val
+        assert closed_brackets2(key) == val
 
 
 if __name__ == '__main__':
