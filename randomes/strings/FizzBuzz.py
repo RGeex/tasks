@@ -8,10 +8,11 @@ from typing import Generator
 
 
 def fizzbuzz(n: int) -> Generator:
-    """Выводит числа от 1 до n, заменяя
+    """
+    Выводит числа от 1 до n, заменяя
     кратные 3 на Fizz, 5 на Buzz, 3 и 5 на
-    FizzBuzz."""
-
+    FizzBuzz.
+    """
     for i in range(1, n + 1):
         result = ''
         if not i % 3:
@@ -22,7 +23,9 @@ def fizzbuzz(n: int) -> Generator:
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
+    """
+    Тестирование работы алгоритмов.
+    """
     data = list(fizzbuzz(15))
     lst1 = [1, 2, 4, 7, 8, 11, 13, 14]
     lst2 = ['Fizz', 'Buzz', 'Fizz', 'Fizz', 'Buzz', 'Fizz', 'FizzBuzz']

@@ -13,13 +13,16 @@
 
 
 def center(strng: str, width: int, fill: str = ' ') -> str:
-    """Центрирование строки с помощью заданного символа"""
+    """
+    Центрирование строки с помощью заданного символа.
+    """
     return f'{strng:^{width - (len(strng) - width) % 2}}'.rjust(width).replace(' ', fill)
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
-
+    """
+    Тестирование работы алгоритмов.
+    """
     data = (
         (("a", 3), " a "),
         (("abcdefg", 2), "abcdefg"),

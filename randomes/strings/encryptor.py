@@ -11,7 +11,9 @@
 
 
 def encryptor(key: int, message: str) -> str:
-    """Алгоритм шифра Цезаря"""
+    """
+    Алгоритм шифра Цезаря.
+    """
     result = ''
     for char in message:
         if char.isalpha():
@@ -22,8 +24,9 @@ def encryptor(key: int, message: str) -> str:
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
-
+    """
+    Тестирование работы алгоритмов.
+    """
     data = (
         ((13, ''), ''),
         ((-5, 'Hello World!'), 'Czggj Rjmgy!'),

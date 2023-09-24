@@ -9,8 +9,9 @@
 
 
 def parse_int(string: str) -> int:
-    """Преобразование строки в число."""
-
+    """
+    Преобразование строки в число.
+    """
     ref = {
         'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
         'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
@@ -33,7 +34,9 @@ def parse_int(string: str) -> int:
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
+    """
+    Тестирование работы алгоритмов.
+    """
     data = [
         ('two hundred forty-six', 246),
         ('seven hundred thousand', 700000),

@@ -8,13 +8,16 @@ import re
 
 
 def camelize(string: str) -> str:
-    """Преобразование строки в PascalCase"""
+    """
+    Преобразование строки в PascalCase.
+    """
     return ''.join(x.capitalize() for x in re.findall(r'[^\W_]+', string))
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
-
+    """
+    Тестирование работы алгоритмов.
+    """
     data = (
         ("testing ABC", "TestingAbc"),
         ("example name", "ExampleName"),

@@ -8,14 +8,17 @@
 
 
 def consonant_count(string: str) -> int:
-    """Подсчет согласных в строке."""
+    """
+    Подсчет согласных в строке.
+    """
     data = set(map(chr, range(97, 123))) - set('aeiou')
     return sum(char in data for char in string.lower())
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
-
+    """
+    Тестирование работы алгоритмов.
+    """
     data = (
         ('', 0),
         ('aaaaa', 0),

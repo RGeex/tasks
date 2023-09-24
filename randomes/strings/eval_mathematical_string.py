@@ -14,8 +14,9 @@ from functools import reduce
 
 
 def calc1(expression: str) -> int | float:
-    """Вычисляет математическое выражение в строке."""
-
+    """
+    Вычисляет математическое выражение в строке.
+    """
     binops = {
         ast.Add: operator.add,
         ast.Sub: operator.sub,
@@ -28,7 +29,9 @@ def calc1(expression: str) -> int | float:
     }
 
     def _eval(node: ast.parse) -> float | None:
-        """Парсит строку и производит вычисления."""
+        """
+        Парсит строку и производит вычисления.
+        """
         if isinstance(node, ast.Expression):
             return _eval(node.body)
         if isinstance(node, ast.Constant):
@@ -46,7 +49,9 @@ def calc1(expression: str) -> int | float:
 
 
 def calc2(expression: str) -> int | float:
-    """Вычисляет математическое выражение в строке."""
+    """
+    Вычисляет математическое выражение в строке.
+    """
     binops = {
         '-': operator.sub,
         '+': operator.add,
@@ -57,7 +62,9 @@ def calc2(expression: str) -> int | float:
     ops = '\\'.join([' ', *binops]).strip()
 
     def _eval(node: str) -> float:
-        """Парсит строку и производит вычисления."""
+        """
+        Парсит строку и производит вычисления.
+        """
 
         # замена подряд идущих знаков "+" и "-" на один
         for i, val in enumerate(['+-', '--']):
@@ -93,7 +100,9 @@ def calc2(expression: str) -> int | float:
 
 
 def test() -> None:
-    """Тестирование работы алгоритмов."""
+    """
+    Тестирование работы алгоритмов.
+    """
     cases = (
         ("1 + 1", 2),
         ("8/16", 0.5),
