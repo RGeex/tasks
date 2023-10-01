@@ -29,11 +29,18 @@ solution (20) # => 78 = 3 + 5 + 6 + 9 + 10 + 12 + 15 + 18
 """
 
 
-def sum_range(num: int) -> int:
+def sum_range1(num: int) -> int:
     """
     Подсчет суммы чисел кратных 3 и 5 лежащих в заданном диапазоне.
     """
     return sum(i for i in range(3, num) if not i % 3 or not i % 5)
+
+
+def sum_range2(n: int) -> int:
+    """
+    Подсчет суммы чисел кратных 3 и 5 лежащих в заданном диапазоне.
+    """
+    return sum((x := (n - 1) // i) and i * (x * (x - 1) // 2 + x) * [-1, 1][i < 15] for i in (3, 5, 15))
 
 
 def test() -> None:
@@ -49,7 +56,8 @@ def test() -> None:
         (10000, 23331668),
     )
     for key, val in data:
-        assert sum_range(key) == val
+        assert sum_range1(key) == val
+        assert sum_range2(key) == val
 
 
 if __name__ == '__main__':
