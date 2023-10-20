@@ -23,7 +23,7 @@ FUNC = {
 }
 
 
-def calc(_=None):
+def calc(_=None) -> int:
 
     string = inspect.stack()[1][4][0].strip()
     a, f, b = string[string.find('(') + 1:-1].split('(')[:3]
