@@ -21,11 +21,22 @@ Input: 6 ➞ Output: 55252
 from collections import Counter
 
 
-def lucky_ticket(n: int) -> int:
+def lucky_ticket1(n: int) -> int:
     """
     Кол-во счастливых билетов в N значном билете.
     """
     return sum(x ** 2 for x in Counter(sum(map(int, str(x))) for x in range(10 ** (n // 2))).values())
+
+
+def lucky_ticket2(n: int) -> int:
+    """
+    Кол-во счастливых билетов в N значном билете.
+    """
+    tmp = [1] * 10 + [0] * (n // 2 * 9 - 9)
+    for _ in range(n // 2 - 1):
+        tmp = [sum(tmp[:i + 1]) if i < 10 else sum(tmp[i - 9:i + 1])
+               for i in range(len(tmp))]
+    return sum(i ** 2 for i in tmp)
 
 
 def test() -> None:
@@ -38,7 +49,8 @@ def test() -> None:
         (6, 55252)
     )
     for key, val in data:
-        assert lucky_ticket(key) == val
+        assert lucky_ticket1(key) == val
+        assert lucky_ticket2(key) == val
 
 
 if __name__ == '__main__':
