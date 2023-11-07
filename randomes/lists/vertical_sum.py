@@ -73,7 +73,7 @@ vertical_sum(5, 4)  --> 15
 """
 
 
-def vertical_sum(n: int, i: int) -> int:
+def vertical_sum1(n: int, i: int) -> int:
     """
     Вертикальная сумма пирамиды.
     """
@@ -87,6 +87,13 @@ def vertical_sum(n: int, i: int) -> int:
         res.append([val.pop(0) if y in idx else 0 for y in range(n * 2 - 1)])
 
     return sum(list(zip(*res))[n + i - 1])
+
+
+def vertical_sum2(n: int, i: int) -> int:
+    """
+    Вертикальная сумма пирамиды.
+    """
+    return sum(x * (x + 1) // 2 + 1 + (x + i) // 2 for x in range(n) if x % 2 == i % 2 and abs(i) < x + 1)
 
 
 def test() -> None:
@@ -106,7 +113,8 @@ def test() -> None:
         ((5, 4),  15),
     )
     for key, val in data:
-        assert vertical_sum(*key) == val
+        assert vertical_sum1(*key) == val
+        assert vertical_sum2(*key) == val
 
 
 if __name__ == '__main__':
