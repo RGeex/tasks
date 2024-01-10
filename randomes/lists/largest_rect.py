@@ -36,12 +36,21 @@
 площадь наибольшего прямоугольника, помещающегося на этом фоне.
 """
 
+from itertools import groupby as gb
 
-def largest_rect(arr: list) -> int:
+
+def largest_rect1(arr: list) -> int:
     """
     Поиск максимальной площади.
     """
     return max([v * (sum(next((n for n, x in enumerate(lst) if x < v), len(lst)) for lst in (arr[i:], arr[i::-1])) - 1) for i, v in enumerate(arr)] or [0])
+
+
+def largest_rect2(arr: list) -> int:
+    """
+    Поиск максимальной площади.
+    """
+    return max(x * max(sum(n) for _, n in gb([not n < x for n in arr or [0]])) for x in arr or [0])
 
 
 def test() -> None:
@@ -60,7 +69,8 @@ def test() -> None:
         ([9, 7, 5, 4, 2, 5, 6, 7, 7, 5, 7, 6, 4, 4, 3, 2], 36),
     )
     for key, val in data:
-        assert largest_rect(key) == val
+        assert largest_rect1(key) == val
+        assert largest_rect2(key) == val
 
 
 if __name__ == '__main__':
