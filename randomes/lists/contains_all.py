@@ -34,11 +34,19 @@ def contains_all(m: list, n: list) -> bool:
     return reduce(lambda a, b: a & b == b, [Counter([(i, type(i)) for i in x]) for x in (m, n)])
 
 
-data = (
-    (([1, 2, 3], [2, 3]), True),
-    (([1, 2, 3], [1, 2, 2]), False),
-    (([1.0, 2.0, 3.0], [1, 2, 3]), False),
-    ((['1', 2, 3.0], [1, 2, 3]), False),
-)
-for key, val in data:
-    assert contains_all(*key) == val
+def test() -> None:
+    """
+    Тестирование работы алгоритмов.
+    """
+    data = (
+        (([1, 2, 3], [2, 3]), True),
+        (([1, 2, 3], [1, 2, 2]), False),
+        (([1.0, 2.0, 3.0], [1, 2, 3]), False),
+        ((['1', 2, 3.0], [1, 2, 3]), False),
+    )
+    for key, val in data:
+        assert contains_all(*key) == val
+
+
+if __name__ == '__main__':
+    test()
