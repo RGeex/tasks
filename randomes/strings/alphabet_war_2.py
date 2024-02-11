@@ -41,13 +41,25 @@ import re
 from operator import eq, lt
 
 
-def alphabet_war(fight: str) -> str:
+def alphabet_war1(fight: str) -> str:
     """
     Определяет кто победит в противостоянии букв.
     """
-    k = {k: (v, 0)[::[-1, 1][3 < i]] for i, (k, v) in enumerate(zip('wpbsmqdz', [4, 3, 2, 1]*2))}
-    x = list(map(sum, zip(*[k.get(x, (0, 0)) for x in re.sub(r'.?\*+.?', '', fight)])))
+    k = {k: (v, 0)[::[-1, 1][3 < i]]
+         for i, (k, v) in enumerate(zip('wpbsmqdz', [4, 3, 2, 1]*2))}
+    x = list(map(sum, zip(*[k.get(x, (0, 0))
+             for x in re.sub(r'.?\*+.?', '', fight)])))
     return "Let's fight again!" if not x or eq(*x) else f'{["Right", "Left"][lt(*x)]} side wins!'
+
+
+def alphabet_war2(fight: str) -> str:
+    """
+    Определяет кто победит в противостоянии букв.
+    """
+
+    k = {k: v for v, k in enumerate('wpbs zdqm', -4)}
+    x = sum(k.get(x, 0) for x in re.sub(r'.?\*+.?', '', fight))
+    return "Let's fight again!" if not x else f'{["Left", "Right"][0 < x]} side wins!'
 
 
 def test() -> None:
@@ -67,7 +79,8 @@ def test() -> None:
         ("mb**qwwp**dm", "Let's fight again!"),
     )
     for key, val in data:
-        assert alphabet_war(key) == val
+        assert alphabet_war1(key) == val
+        assert alphabet_war2(key) == val
 
 
 if __name__ == '__main__':
