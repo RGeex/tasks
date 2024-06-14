@@ -21,22 +21,14 @@ same_structure_as([ [ [ ], [ ] ] ], [ [ 1, 1 ] ] )
 """
 
 
-from itertools import zip_longest
+from itertools import zip_longest as zl
 
 
-def same_structure_as(original: list, other: list) -> bool:
+def same_structure_as(*x: list) -> bool:
     """
     Проверяет 2 списка на идентичную вложенность по типу элементов.
     """
-    stack = [[original, other]]
-    while stack:
-        cur = stack.pop()
-        for x in zip_longest(*cur):
-            if len(set(map(type, x))) != 1:
-                return False
-            if all(isinstance(n, list) for n in x):
-                stack.append(x)
-    return True
+    return not set(map(type, x))-{list} and all(len(c)-2 and same_structure_as(*n) if list in (c:=set(map(type, n))) else len(set(map(len, x)))-2 for n in zl(*x))
 
 
 def test() -> None:
@@ -44,8 +36,11 @@ def test() -> None:
     Тестирование работы алгоритмов.
     """
     data = (
+        (([], 1), False),
+        (([1, [1, 1]], [2, [2]]), False),
         (([1, [1, 1]], [2, [2, 2]]), True),
         (([1, [1, 1]], [[2, 2], 2]), False),
+        (([1, '[', ']'], ['[', ']', 2]), True),
     )
     for key, val in data:
         assert same_structure_as(*key) == val
