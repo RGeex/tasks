@@ -42,12 +42,15 @@ b >= a и b - a <= 1. Последняя строка, если она непо�
 """
 
 
+import re
+
+
 def cipher_text(s: str) -> str:
     """
     Шифрование строки.
     """
-    s = __import__('re').sub(r'[^a-z]', '', s.lower())
-    n = [x := (not (x := len(s) ** .5).is_integer()) + int(x), [x, x - 1][len(s) < (x - 1) * x]]
+    s = re.sub(r'[^a-z]', '', s.lower())
+    n = [x := (not (x := len(s) ** .5).is_integer()) + int(x), [x, x - 1][len(s) <= (x - 1) * x]]
     return ' '.join(map(''.join, zip(*[f'{s[i*n[0]:i*n[0]+n[0]]:<{n[0]}}' for i in range(n[1])])))
 
 
