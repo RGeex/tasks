@@ -48,11 +48,18 @@ from typing import Any
 from itertools import combinations as cb
 
 
-def est_subsets(arr: list[Any]) -> int:
+def est_subsets_1(arr: list[Any]) -> int:
     """
     Подсчитывает кол-во уникальных подмножеств.
     """
     return sum(map(len, [list(cb(set(arr), i + 1)) for i in range(len(set(arr)))]))
+
+
+def est_subsets_2(arr: list[Any]) -> int:
+    """
+    Подсчитывает кол-во уникальных подмножеств.
+    """
+    return 2 ** len(set(arr)) - 1
 
 
 def test() -> None:
@@ -68,7 +75,8 @@ def test() -> None:
         ([], 0),
     )
     for key, val in data:
-        assert est_subsets(key) == val
+        assert est_subsets_1(key) == val
+        assert est_subsets_2(key) == val
 
 
 if __name__ == '__main__':
