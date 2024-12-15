@@ -18,10 +18,10 @@ Level:        1        2  3       
 """
 
 
-def strings_in_max_depth(s: str) -> list[str]:
+def strings_in_max_depth_1(s: str) -> list[str]:
     """
-        Выполняет поиск максимальной глубины сложения скобок.
-        """
+    Выполняет поиск максимальной глубины вложения скобок.
+    """
     def wrap(s: str, n: int = 0, t: dict = {}) -> list[str]:
         """
         Обертка для изменяемого типа данных в контексте.
@@ -37,6 +37,20 @@ def strings_in_max_depth(s: str) -> list[str]:
     return wrap(s)
 
 
+def strings_in_max_depth_2(s: str) -> list[str]:
+    """
+    Выполняет поиск максимальной глубины вложения скобок.
+    """
+    a, b, c, r = 0, 0, [], {0: [s]}
+
+    for i, x in enumerate(s):
+        if x == '(':
+            a, c = a + 1, c + [b := i + 1]
+        if x == ')':
+            r[a], a = r.get(a, []) + [[s[b:i]], []][')' in s[b:i]], a - 1
+    return max(r.items())[1]
+
+
 def test() -> None:
     """
     Тестирование работы алгоритмов.
@@ -49,7 +63,8 @@ def test() -> None:
         ("", [""]),
     )
     for key, val in data:
-        assert strings_in_max_depth(key) == val
+        assert strings_in_max_depth_1(key) == val
+        assert strings_in_max_depth_2(key) == val
 
 
 if __name__ == '__main__':
