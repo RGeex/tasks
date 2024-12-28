@@ -27,8 +27,7 @@ def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> N
         return lambda self: self.assertEqual(func(key), val)
 
     funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
-    tests = type('Tests', (unittest.TestCase,), funcs)
-    suite = unittest.TestLoader().loadTestsFromTestCase(tests)
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
 
     unittest.TextTestRunner().run(suite)
 
