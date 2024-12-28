@@ -3,6 +3,7 @@ __pycache__/*
 venv/*
 
 Pipfile*
+.directory
 .config
 .env
 *.pyc
