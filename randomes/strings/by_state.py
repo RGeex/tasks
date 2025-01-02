@@ -5,7 +5,9 @@ ad3="John Daggett, 341 King Road, Plymouth MA
 Alice Ford, 22 East Broadway, Richmond VA
 Sal Carpenter, 73 6th Street, Boston MA"
 
-мы хотим получить результат, который сортирует имена по штатам и выводит название штата, за которым следуют имена каждого человека, проживающего в этом штате (отсортированные имена людей). Когда результат напечатан, мы получаем:
+мы хотим получить результат, который сортирует имена по штатам и выводит
+название штата, за которым следуют имена каждого человека, проживающего в
+этом штате (отсортированные имена людей). Когда результат напечатан, мы получаем:
 
 Massachusetts
 .....^John Daggett 341 King Road Plymouth Massachusetts
@@ -13,11 +15,14 @@ Massachusetts
 ^Virginia
 .....^Alice Ford 22 East Broadway Richmond Virginia
 
-Пространства не всегда хорошо видны в приведенном выше результате. ^ означает белое пространство.
+Пространства не всегда хорошо видны в приведенном выше результате. ^ означает
+белое пространство.
 
 Результирующая строка (если она не напечатана) будет:
 
-"Massachusetts\n..... John Daggett 341 King Road Plymouth Massachusetts\n..... Sal Carpenter 73 6th Street Boston Massachusetts\n Virginia\n..... Alice Ford 22 East Broadway Richmond Virginia"
+"Massachusetts\n..... John Daggett 341 King Road Plymouth Massachusetts\n.....
+Sal Carpenter 73 6th Street Boston Massachusetts\n Virginia\n..... Alice Ford
+22 East Broadway Richmond Virginia"
 
 или (разделитель \n или \r\n в зависимости от языка)
 
