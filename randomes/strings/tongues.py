@@ -1,21 +1,47 @@
 """
-Завершите функцию/метод так, чтобы она заняла PascalCase строку и возвращает
-строку в snake_case обозначения. Символы нижнего регистра могут быть числами.
-Если метод получает на вход число, он должен вернуть строку.
-Примеры
+Языки
 
-"TestController"  -->  "test_controller"
-"MoviesAndBooks"  -->  "movies_and_books"
-"App7Test"        -->  "app7_test"
-1                 -->  "1"
+Сочинения Гэндальфа уже давно доступны для изучения, но никто до сих пор не выяснил, на каком языке
+они написаны. Недавно благодаря программной работе хакера, известного только под кодовым именем
+ROT13, было обнаружено, что Гэндальф не использовал ничего, кроме простая схема замены букв, и,
+кроме того, она сама по себе обратна: одна и та же операция шифрует сообщение, как и расшифровывает
+его.
+
+Данная операция выполняется путем замены гласных в последовательности 'a' 'i' 'y' 'e' 'o' 'u' с
+тремя гласными, циклически продвигаясь вперед, сохраняя регистр (т. е. нижний или верхний).
+
+Аналогично заменяются согласные из последовательности
+'b' 'k' 'x' 'z' 'n' 'h' 'd' 'c' 'w' 'g' 'p' 'v' 'j' 'q' 't' 's' 'r' 'l' 'm' 'f' продвинув вперед
+десять букв.
+
+Так, например, фраза 'One ring to rule them all.' переводится на 'Ita dotf ni dyca nsaw ecc.'
+
+Самое интересное в этом преобразовании то, что в результате получается произносимые слова. Для
+решения этой задачи вы напишете код для перевода рукописей Гэндальфа в обычный текст.
+
+Ваша задача — написать функцию, которая расшифровывает записи Гэндальфа.
+Вход
+
+Функции будет передана строка для декодирования. Каждая строка будет содержать до 100 символов,
+представляющих текст, написанный Гэндальфом. Все символы будут в формате ASCII в диапазоне от (32)
+до тильды (126).
+Выход
+
+Для каждой строки, переданной функции декодирования, возвращается ее перевод.
 """
-import re
 import typing
 
 
-def to_underscore(st: str | int) -> str:
-    """CamelCase to snake_case."""
-    return re.sub(r'([A-Z])', lambda m: f'_{m.group(1).lower()}', str(st)).strip('_')
+def tongues(st: str) -> str:
+    """
+    Производит замену букв, гласных со сдвигом на 3 символа,
+    согласных на 10 символов.
+    """
+    trans = (
+        'aiyeoubkxznhdcwgpvjqtsrlmfAIYEOUBKXZNHDCWGPVJQTSRLMF',
+        'eouaiypvjqtsrlmfbkxznhdcwgEOUAIYPVJQTSRLMFBKXZNHDCWG'
+    )
+    return st.translate(str.maketrans(*trans))
 
 
 def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
@@ -33,9 +59,10 @@ def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> N
 
 
 if __name__ == '__main__':
-    test(to_underscore, (
-        (1, "1"),
-        ("App7Test", "app7_test"),
-        ("TestController", "test_controller"),
-        ("MoviesAndBooks", "movies_and_books"),
+    test(tongues, (
+        ('Ita dotf ni dyca nsaw ecc.', 'One ring to rule them all.'),
+        ('Tim oh nsa nowa gid ecc fiir wat ni liwa ni nsa eor ig nsaod liytndu.', 'Now is the time for all good men to come to the aid of their country.'),
+        ('Giydhlida etr hakat uaedh efi iyd gidagensadh pdiyfsn ytni nsoh', 'Fourscore and seven years ago our forefathers brought unto this'),
+        ('litnotatn e tam tenoit.', 'continent a new nation.'),
+        ('Nsa zyolv pdimt gij xywbar ikad nsa cequ rifh.', 'The quick brown fox jumped over the lazy dogs.'),
     ))
