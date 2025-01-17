@@ -9,6 +9,8 @@
 (например, ')('), верните False. В этом ката нас интересует только
 положение круглых скобок «()», другие типы скобок следует игнорировать.
 """
+import typing
+import unittest
 
 
 def bracket_pairs(s: str) -> dict | bool:
@@ -30,22 +32,28 @@ def bracket_pairs(s: str) -> dict | bool:
     return res
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
-        ("len(list)", {3:8}),
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val)
+             for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(
+        type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(bracket_pairs, (
+        ("len(list)", {3: 8}),
         ("string", {}),
         ("", {}),
         ("def f(x", False),
         (")(", False),
-        ("(a(b)c()d)", {0:9,2:4,6:7}),
-        ("f(x[0])", {1:6}),
-    )
-    for key, val in data:
-        assert bracket_pairs(key) == val
-
-
-if __name__ == '__main__':
-    test()
+        ("(a(b)c()d)", {0: 9, 2: 4, 6: 7}),
+        ("f(x[0])", {1: 6}),
+    ))
