@@ -33,7 +33,7 @@ def bang_bang(history: str) -> str:
     """
     Возвращает последнюю команду из истории командной строки.
     """
-    return history.split('\n')[-1][5:]
+    return history.split('\n')[-1].strip().split('  ', 1)[-1]
 
 
 def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
