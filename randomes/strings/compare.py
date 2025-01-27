@@ -17,8 +17,8 @@
 зависимости от того, section1 это до, то же самое, что или после section2
 соответственно.
 """
-
-
+import typing
+import unittest
 from itertools import zip_longest as zl
 
 
@@ -29,11 +29,21 @@ def compare(s1: str, s2: str) -> int:
     return next(([-1, 1][a > b] for a, b in zl(*[map(int, s.split('.')) for s in (s1, s2)], fillvalue=0) if a != b), 0)
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(*key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(compare, (
         (('1', '2'), -1),
         (('1.1', '1.2'), -1),
         (('1.1', '1'), 1),
@@ -48,10 +58,4 @@ def test() -> None:
         (('3.0.0', '3.1.1'), -1),
         (('3.0.1', '3.1'), -1),
         (('1.2.3', '1.02.003'), 0),
-    )
-    for key, val in data:
-        assert compare(*key) == val
-
-
-if __name__ == '__main__':
-    test()
+    ))
