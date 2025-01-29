@@ -10,12 +10,12 @@ endless_string('xyz', -23, 6) == 'yzxyzx'
 Чтобы визуализировать:
 
        Negative                               Positive
-3         2         1         *         1         2         3      
+3         2         1         *         1         2         3
 0987654321098765432109876543210123456789012345678901234567890
 xyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzx
        ******
      -23 for a length of 6 == 'yzxyzx'
-   
+
 
 Еще несколько примеров:
 
@@ -33,7 +33,8 @@ def endless_string(seq: str, start: int, length: int) -> str:
     """
     Возвращает подстроение, начинающееся в начальном месте, и продолжается для длины.
     """
-    return ''.join([seq[(start % len(seq) + i) % len(seq)] for i in range(abs(length))])
+    k, n = [x := start % len(seq), len(seq) - x - 1][length < 0], not length or length // abs(length)
+    return ''.join([seq[::n][(k + i) % len(seq)] for i in range(abs(length))])[::n]
 
 
 def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
