@@ -53,9 +53,9 @@ def rank(st: str, we: list[int], n: int) -> str:
     """
     if not st:
         return 'No participants'
-    if len(st.split(',')) < n:
+    if len(arr := st.split(',')) < n:
         return 'Not enough participants'
-    return sorted(zip(st.split(','), we), key=lambda x: (-((sum(map(f'_{abc}'.index, x[0].lower())) + len(x[0])) * x[1]), x[0]))[n - 1][0]
+    return sorted(zip(arr, we), key=lambda x: (-((sum(map(f'_{abc}'.index, x[0].lower())) + len(x[0])) * x[1]), x[0]))[n - 1][0]
 
 
 def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
