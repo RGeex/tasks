@@ -47,14 +47,14 @@ def key_strokes(keys: list[tuple[int]]) -> str:
 
     for a, b in keys + [(0, 3)]:
         curr = x[b][a] if b < 3 else ' '
-      
-        i = [i, 0][i and curr not in " '"]
-        i = [i, 1][curr == 'i' and prew in " '"]
+
+        i = [i, 0][i and curr.isalpha()]
+        i = [i, 1][curr == 'i' and not prew.isalpha()]
         n = [n, 1][prew in '.?']
-        
-        if (n and prew.isalpha()) or (i and curr in " '"):
+
+        if (n and prew.isalpha()) or (i and not curr.isalpha()):
             prew, i, n = prew.upper(), 0, 0
-    
+
         res, prew = res + prew, curr
 
     return res
