@@ -40,9 +40,9 @@ Examples
     ex3. FYRYFIRUFIRUFURE = "Fake tweet."
 
 """
-
-
 import re
+import typing
+import unittest
 from itertools import groupby as gb
 
 
@@ -54,18 +54,22 @@ def fire_and_fury(s: str) -> str:
     return ' '.join([f'{x[a][1] * (len(list(b)) - 1)}'.join(x[a][0]) for a, b in gb(re.findall('|'.join(x), s))]) or 'Fake tweet.'
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
-        ("FYRYFIRUFIRUFURE", "Fake tweet."),
-        ("FURYYYFIREYYFIRE", "I am furious. You and you are fired!"),
-        ("FIREYYFURYYFURYYFURRYFIRE", "You are fired! I am really furious. You are fired!"),
-    )
-    for key, val in data:
-        assert fire_and_fury(key) == val
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
 
 
 if __name__ == '__main__':
-    test()
+    test(fire_and_fury, (
+        ("FYRYFIRUFIRUFURE", "Fake tweet."),
+        ("FURYYYFIREYYFIRE", "I am furious. You and you are fired!"),
+        ("FIREYYFURYYFURYYFURRYFIRE", "You are fired! I am really furious. You are fired!"),
+    ))
