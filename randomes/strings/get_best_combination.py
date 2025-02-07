@@ -50,9 +50,9 @@ def get_best_combination(n: int) -> str:
     """
     Поиск минимального кол-ва цифр для программирования продолжительности использования СВЧ.
     """
-    x = divmod(n, 60)
-    x = [''.join([f'{x:0>2}' for x in x]).lstrip('0') for x in (x, [x, (x[0] - 1, x[1] + 60)][x[1] + 40 < 100])]
-    return x[min([([x for x, _ in groupby(x)], x, i) for i, x in enumerate(x)], key=lambda x: (len(x[0]), len(x[1])))[2]]
+    div = divmod(n, 60)
+    arr = [''.join([f'{x:0>2}' for x in x]).lstrip('0') for x in (div, [div, (div[0] - 1, div[1] + 60)][div[1] + 40 < 100])]
+    return arr[min([([x for x, _ in groupby(x)], x, i) for i, x in enumerate(arr)], key=lambda x: ((len(x[0]), len(x[1]))))[2]]
 
 
 def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
