@@ -19,14 +19,14 @@ def to_base_64(st: str) -> str:
     """
     Кодирование строки в base64.
     """
-    return base64.b64encode(st.encode('utf-8')).decode('utf-8')
+    return base64.b64encode(st.encode('utf-8')).decode('utf-8').replace('=', '')
 
 
 def from_base_64(st: str) -> str:
     """
     Декодирование строки из base64.
     """
-    return base64.b64decode(st.encode('utf-8')).decode('utf-8')
+    return base64.b64decode((st + '=' * (4 - len(st) % 4)).encode('utf-8')).decode('utf-8')
 
 
 def test(funcs: tuple[typing.Callable], data: tuple[tuple[typing.Any, typing.Any]]) -> None:
