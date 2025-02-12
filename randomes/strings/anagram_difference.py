@@ -13,8 +13,8 @@
     (обычно в разном порядке).
     Не беспокойтесь о случае. Все входные данные будут в нижнем регистре.
 """
-
-
+import typing
+import unittest
 from collections import Counter
 
 
@@ -25,11 +25,21 @@ def anagram_difference(w1: str, w2: str) -> int:
     return sum(map(len, (w1, w2))) - sum((Counter(w1) & Counter(w2)).values()) * 2
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(*key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(anagram_difference, (
         (('', ''), 0),
         (('a', ''), 1),
         (('', 'a'), 1),
@@ -37,10 +47,4 @@ def test() -> None:
         (('ab', 'ba'), 0),
         (('ab', 'cd'), 4),
         (('codewars', 'hackerrank'), 10)
-    )
-    for key, val in data:
-        assert anagram_difference(*key) == val
-
-
-if __name__ == '__main__':
-    test()
+    ))
