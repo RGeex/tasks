@@ -65,9 +65,3 @@ if __name__ == '__main__':
         ("10 2 5 -3 -15 12", "division, subtraction, multiplication, subtraction"),
         ("2 2 4", "addition"),
     ))
-
-
-# print(say_me_operations('2 10 20 0 20 20 40 800 0 0 0 '))
-# print(say_me_operations('11 6 17 -11 -2 5 -1 -5 5 -25'))
-'multiplication, division, addition, addition, multiplication, division'
-'multiplication, division, addition, addition, addition, multiplication, division, multiplication, addition'
