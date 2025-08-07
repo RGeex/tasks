@@ -59,6 +59,3 @@ if __name__ == '__main__':
         (("CodeWars", "+-*/="), "codewars"),
         (("this is a secret", " *"), "this*is*a*secret"),
     ))
-
-# print(abc[:26//2])
-# print(abc[26//2:][::-1])
