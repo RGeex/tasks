@@ -21,6 +21,8 @@ rotate("Hello") // => ["elloH", "lloHe", "loHel", "oHell", "Hello"]
 что и входная строка. Функция должна возвращать пустой массив со строкой
 нулевой длины '' в качестве входных данных.
 """
+import typing
+import unittest
 
 
 def rotate(s: str) -> list[str]:
@@ -30,19 +32,23 @@ def rotate(s: str) -> list[str]:
     return [s[i:] + s[:i] for i in range(1, len(s) + 1)]
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(rotate, (
         ("", []),
         (" ", [" "]),
         ("123", ["231", "312", "123"]),
         ("Hello", ["elloH", "lloHe", "loHel", "oHell", "Hello"]),
-    )
-    for key, val in data:
-        assert rotate(key) == val
-
-
-if __name__ == '__main__':
-    test()
+    ))
