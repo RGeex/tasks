@@ -34,6 +34,8 @@ Y=γ (Gamma)
 CodeWars => cθδεωαπs
 Kata => κατα
 """
+import typing
+import unittest
 
 
 def gr33k_l33t(s: str) -> str:
@@ -43,18 +45,22 @@ def gr33k_l33t(s: str) -> str:
     return s.lower().translate(str.maketrans('abdeiknoprtuvwxy', 'αβδεικηθρπτμυωχγ'))
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
-        ("codewars", "cθδεωαπs"),
-        ("kata", "κατα"),
-        ("kumite", "κμmιτε"),
-    )
-    for key, val in data:
-        assert gr33k_l33t(key) == val
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
 
 
 if __name__ == '__main__':
-    test()
+    test(gr33k_l33t, (
+        ("codewars", "cθδεωαπs"),
+        ("kata", "κατα"),
+        ("kumite", "κμmιτε"),
+    ))
