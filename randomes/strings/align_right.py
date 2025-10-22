@@ -37,6 +37,8 @@ nostrud. Corned beef ex pig do
   in enim corned beef non est.
 
 """
+import typing
+import unittest
 
 
 def align_right(text: str, width: int) -> str:
@@ -49,18 +51,22 @@ def align_right(text: str, width: int) -> str:
     return '\n'.join(res)
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
-        (("abc def",10),'   abc def'),
-        (("I take up the whole line",24),'I take up the whole line'),
-        (("Two lines, I am",10),'Two lines,\n      I am'),
-    )
-    for key, val in data:
-        assert align_right(*key) == val
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(*key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
 
 
 if __name__ == '__main__':
-    test()
+    test(align_right, (
+        (("abc def",10),'   abc def'),
+        (("I take up the whole line",24),'I take up the whole line'),
+        (("Two lines, I am",10),'Two lines,\n      I am'),
+    ))
