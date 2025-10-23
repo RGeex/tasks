@@ -25,7 +25,8 @@ abbreviate("elephant-rides are really fun!")
 //                     "-"      " "    " "     " "     "!"
 === "e6t-r3s are r4y fun!"
 """
-
+import typing
+import unittest
 import re
 
 
@@ -36,19 +37,23 @@ def abbreviate(s: str) -> str:
     return ''.join([x if len(x) < 4 else f'{len(x) - 2}'.join(x[::len(x) - 1]) for x in re.split(r'([^\W\d_]+)', s)])
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(abbreviate, (
         ("internationalization", "i18n"),
         ("accessibility", "a11y"),
         ("Accessibility", "A11y"),
         ("elephant-ride", "e6t-r2e"),
-    )
-    for key, val in data:
-        assert abbreviate(key) == val
-
-
-if __name__ == '__main__':
-    test()
+    ))
