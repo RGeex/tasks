@@ -37,8 +37,8 @@
 В этом случае убедитесь, что предложения по-прежнему начинаются с заглавных букв.
 '!' или '?' не будет использоваться.
 """
-
-
+import typing
+import unittest
 import re
 
 
@@ -67,11 +67,21 @@ def acronym_buster(s: str) -> str:
     return re.sub(r'([.!?]\s|^)([a-z])', lambda x: x.group(1) + x.group(2).upper(), re.sub(r'\b[A-Z]{3,}\b', lambda x: acr[x.group()], s))
 
 
-def test() -> None:
-    """
-    Тестирование работы алгоритмов.
-    """
-    data = (
+def test(func: typing.Callable, data: tuple[tuple[typing.Any, typing.Any]]) -> None:
+    """Тестирование работы алгоритмов с помощью unittest."""
+
+    def test_func(func: typing.Callable, key: typing.Any, val: typing.Any) -> typing.Callable:
+        """Создает кейсы для тестирования."""
+        return lambda self: self.assertEqual(func(key), val)
+
+    funcs = {f'test_{i}': test_func(func, key, val) for i, (key, val) in enumerate(data, 1)}
+    suite = unittest.TestLoader().loadTestsFromTestCase(type('Tests', (unittest.TestCase,), funcs))
+
+    unittest.TextTestRunner().run(suite)
+
+
+if __name__ == '__main__':
+    test(acronym_buster, (
         ("BRB I need to go into a KPI meeting before EOD",
         "BRB is an acronym. I do not like acronyms. Please remove them from your email."),
         ("I am IAM so will be OOO until EOD",
@@ -124,10 +134,4 @@ def test() -> None:
         "RFP is an acronym. I do not like acronyms. Please remove them from your email."),
         ("My SM account needs some work.",
         "My SM account needs some work."),
-    )
-    for key, val in data:
-        assert acronym_buster(key) == val
-
-
-if __name__ == '__main__':
-    test()
+    ))
