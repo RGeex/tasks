@@ -11,6 +11,9 @@ import unittest
 
 
 def flatten(lst: list[int | str | list]) -> list[int | str | list]:
+    """
+    Распаковывает элемент списка если он является списком.
+    """
     return [a for b in lst for a in [[b], b][isinstance(b, list)]]
 
 
