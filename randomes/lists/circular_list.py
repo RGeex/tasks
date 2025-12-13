@@ -23,6 +23,8 @@ class CircularList():
     Зацикливает переданные аргументы.
     """
     def __init__(self, *args) -> None:
+        if not args:
+            raise ValueError('there must be at least 1 argument')
         self.lst: List[Any] = args
         self.index: int | None = None
 
