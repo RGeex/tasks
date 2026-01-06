@@ -9,6 +9,9 @@ from typing import Any, Callable, List, Tuple
 
 
 def sum_nested(lst: List[Any]) -> int:
+    """
+    Подсчитывает сумму чисел в списке любой вложенности.
+    """
     return sum(sum_nested(x) if isinstance(x, list) else x for x in lst)
 
 
