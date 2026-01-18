@@ -32,7 +32,8 @@ def grid_index(grid: List[List[str]], indexes: List[int]) -> str:
     """
     Вытаскивает символы из квадратной матрицы по их порядковому номеру.
     """
-    data = dict([(i, x) for i, x in enumerate([b for a in grid for b in a], 1) if i in indexes])
+    data = {}.fromkeys(indexes, '')
+    data = dict([(i, x) for i, x in enumerate([b for a in grid for b in a], 1) if i in data])
     return ''.join(data[x] for x in indexes)
 
 
