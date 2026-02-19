@@ -30,7 +30,7 @@ class LinkedList:
         self.next = next
 
 
-def list_to_array(node: LinkedList | None) -> list:
+def list_to_array(node: LinkedList | None) -> List[int]:
     """
     Связный список в массив.
     """
