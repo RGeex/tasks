@@ -25,6 +25,13 @@ def time_convert(num: int) -> str:
     return f'{(num > 0 and num) // 60:0>2}:{(num > 0 and num) % 60:0>2}'
 
 
+def time_convert_2(num: int) -> str:
+    """
+    Определяет кол-во часов и минут в заданном кол-ве минут.
+    """
+    return '{:02}:{:02}'.format(*divmod(num > 0 and num, 60))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -40,6 +47,18 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(time_convert, (
+        (0, '00:00'),
+        (-6, '00:00'),
+        (8, '00:08'),
+        (32, '00:32'),
+        (75, '01:15'),
+        (63, '01:03'),
+        (134, '02:14'),
+        (180, '03:00'),
+        (970, '16:10'),
+        (565757, '9429:17'),
+    ))
+    test(time_convert_2, (
         (0, '00:00'),
         (-6, '00:00'),
         (8, '00:08'),
