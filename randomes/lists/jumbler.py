@@ -69,11 +69,22 @@ import unittest
 from typing import Any, Callable, List, Tuple
 
 
-def jumbler(indices: List[int], n=0) -> int:
+def jumbler_1(indices: List[int], n=0) -> int:
     """
     Определяет ко-во требуемых перестановок.
     """
-    return indices[0] and jumbler([indices.pop(indices[0])] + indices, n + 1) or n
+    return indices[0] and jumbler_1([indices.pop(indices[0])] + indices, n + 1) or n
+
+
+def jumbler_2(indices: List[int]) -> int:
+    """
+    Определяет ко-во требуемых перестановок.
+    """
+    n = 0
+    while indices[0]:
+        indices.insert(0, indices.pop(indices[0]))
+        n += 1
+    return n
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -90,7 +101,18 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 
 if __name__ == '__main__':
-    test(jumbler, (
+    test(jumbler_1, (
+        ([0],                          0),
+        ([1, 0],                       1),
+        ([2, 0, 1],                    3),
+        ([3, 0, 1, 2],                 2),
+        ([3, 1, 4, 2, 0],              6),
+        ([5, 3, 1, 0, 4, 2],           9),
+        ([5, 2, 4, 0, 1, 6, 3],        7),
+        ([5, 3, 6, 7, 0, 4, 1, 2],     9),
+        ([2, 6, 8, 3, 5, 4, 0, 7, 1], 12),
+    ))
+    test(jumbler_2, (
         ([0],                          0),
         ([1, 0],                       1),
         ([2, 0, 1],                    3),
