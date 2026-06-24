@@ -31,6 +31,13 @@ def hydrate(drink_string: str) -> str:
     return f'{(x := sum(int(x[0]) for x in drink_string.replace(" and", ",").split(", ")))} glass{["es", ""][x == 1]} of water'
 
 
+def hydrate_2(drink_string: str) -> str:
+    """
+    Определяет кол-во стаканов воды, которые нужно выпить.
+    """
+    return f'{(x := sum(int(x[0]) for x in drink_string.split() if x.isdigit()))} glass{["es", ""][x == 1]} of water'
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -46,6 +53,10 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(hydrate, (
+        ("1 beer", "1 glass of water"),
+        ("1 shot, 5 beers, 2 shots, 1 glass of wine, 1 beer", "10 glasses of water"),
+    ))
+    test(hydrate_2, (
         ("1 beer", "1 glass of water"),
         ("1 shot, 5 beers, 2 shots, 1 glass of wine, 1 beer", "10 glasses of water"),
     ))
