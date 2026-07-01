@@ -31,6 +31,13 @@ def calc_type(a: int, b: int, res: int | float) -> str:
     return {a + b == res: "addition", a - b == res: "subtraction", a * b == res: "multiplication", a / b == res: "division"}.get(1, '')
 
 
+def calc_type_2(a: int, b: int, res: int | float) -> str:
+    """
+    Определяет, какая операция была произведена для получения заданного результата.
+    """
+    return {a + b: "addition", a - b: "subtraction", a * b: "multiplication", a / b: "division"}.get(res, '')
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -46,6 +53,12 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(calc_type, (
+        ((1, 2, 3), "addition"),
+        ((10, 5, 5), "subtraction"),
+        ((10, 4, 40), "multiplication"),
+        ((9, 5, 1.8), "division"),
+    ))
+    test(calc_type_2, (
         ((1, 2, 3), "addition"),
         ((10, 5, 5), "subtraction"),
         ((10, 4, 40), "multiplication"),
