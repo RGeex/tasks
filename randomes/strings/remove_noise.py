@@ -25,6 +25,13 @@ def remove_noise(st: str) -> str:
     return st.translate(str.maketrans('', '', '%$&/#·@|º\\ª'))
 
 
+def remove_noise_2(st: str) -> str:
+    """
+    Удаляет шум из сообщения.
+    """
+    return ''.join(x for x in st if x not in '%$&/#·@|º\\ª')
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -40,6 +47,12 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(remove_noise, (
+        ("%$&/#·@|º\\ª", ""),
+        ("h%e&·%$·llo w&%or&$l·$%d", "hello world"),
+        ("he%$·ll@o c$&%odi%&ng for ev|#·ery&$$#$on%$·e", "hello coding for everyone"),
+        ("c|o@$%de%w@a·$r%s &rºocªks", "codewars rocks"),
+    ))
+    test(remove_noise_2, (
         ("%$&/#·@|º\\ª", ""),
         ("h%e&·%$·llo w&%or&$l·$%d", "hello world"),
         ("he%$·ll@o c$&%odi%&ng for ev|#·ery&$$#$on%$·e", "hello coding for everyone"),
