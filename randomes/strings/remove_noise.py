@@ -16,6 +16,7 @@ remove_noise("h%e&·%$·llo w&%or&$l·$%d")
 """
 import unittest
 from typing import Any, Callable, Tuple
+import re
 
 
 def remove_noise(st: str) -> str:
@@ -30,6 +31,13 @@ def remove_noise_2(st: str) -> str:
     Удаляет шум из сообщения.
     """
     return ''.join(x for x in st if x not in '%$&/#·@|º\\ª')
+
+
+def remove_noise_3(st: str) -> str:
+    """
+    Удаляет шум из сообщения.
+    """
+    return re.sub(r'[%$&/#·@|º\\ª]', '', st)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -53,6 +61,12 @@ if __name__ == '__main__':
         ("c|o@$%de%w@a·$r%s &rºocªks", "codewars rocks"),
     ))
     test(remove_noise_2, (
+        ("%$&/#·@|º\\ª", ""),
+        ("h%e&·%$·llo w&%or&$l·$%d", "hello world"),
+        ("he%$·ll@o c$&%odi%&ng for ev|#·ery&$$#$on%$·e", "hello coding for everyone"),
+        ("c|o@$%de%w@a·$r%s &rºocªks", "codewars rocks"),
+    ))
+    test(remove_noise_3, (
         ("%$&/#·@|º\\ª", ""),
         ("h%e&·%$·llo w&%or&$l·$%d", "hello world"),
         ("he%$·ll@o c$&%odi%&ng for ev|#·ery&$$#$on%$·e", "hello coding for everyone"),
