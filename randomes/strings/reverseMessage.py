@@ -23,6 +23,13 @@ def reverseMessage(text: str) -> str:
     return ' '.join(x[0].upper() + x[1:] for x in text[::-1].lower().split())
 
 
+def reverseMessage_2(text: str) -> str:
+    """
+    Переворачивает сообщение.
+    """
+    return ' '.join(map(str.capitalize, text[::-1].split()))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -38,6 +45,15 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(reverseMessage, (
+        ('AaaaA', 'Aaaaa'),
+        ('Hello there', 'Ereht Olleh'),
+        ('Pl34k78j', 'J87k43lp'),
+        ('Reverse this message!', '!egassem Siht Esrever'),
+        ('Today is the 14th of January!', '!yraunaj Fo Ht41 Eht Si Yadot'),
+        ('hty56hA T76#Td', 'Dt#67t Ah65yth'),
+        ('', ''),
+    ))
+    test(reverseMessage_2, (
         ('AaaaA', 'Aaaaa'),
         ('Hello there', 'Ereht Olleh'),
         ('Pl34k78j', 'J87k43lp'),
