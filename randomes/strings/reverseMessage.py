@@ -14,6 +14,7 @@ Returns: '!egassem Desrever A Fo Elpmaxe Na Si Siht'
 """
 import unittest
 from typing import Any, Callable, Tuple
+from string import capwords
 
 
 def reverseMessage(text: str) -> str:
@@ -28,6 +29,13 @@ def reverseMessage_2(text: str) -> str:
     Переворачивает сообщение.
     """
     return ' '.join(map(str.capitalize, text[::-1].split()))
+
+
+def reverseMessage_3(text: str) -> str:
+    """
+    Переворачивает сообщение.
+    """
+    return capwords(text[::-1])
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -54,6 +62,15 @@ if __name__ == '__main__':
         ('', ''),
     ))
     test(reverseMessage_2, (
+        ('AaaaA', 'Aaaaa'),
+        ('Hello there', 'Ereht Olleh'),
+        ('Pl34k78j', 'J87k43lp'),
+        ('Reverse this message!', '!egassem Siht Esrever'),
+        ('Today is the 14th of January!', '!yraunaj Fo Ht41 Eht Si Yadot'),
+        ('hty56hA T76#Td', 'Dt#67t Ah65yth'),
+        ('', ''),
+    ))
+    test(reverseMessage_3, (
         ('AaaaA', 'Aaaaa'),
         ('Hello there', 'Ereht Olleh'),
         ('Pl34k78j', 'J87k43lp'),
