@@ -45,9 +45,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 if __name__ == '__main__':
     test(encode, (
         ('Hello World!', 'ưɞʈʈʚÀȊʚʬʈɘÆ'),
+        ('More tests', 'ǎʚʬɞÀʸɞʲʸʲ'),
         ('', ''),
     ))
     test(decode, (
         ('ưɞʈʈʚÀȊʚʬʈɘÆ', 'Hello World!'),
+        ('ǎʚʬɞÀʸɞʲʸʲ', 'More tests'),
         ('', ''),
     ))
