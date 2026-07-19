@@ -32,6 +32,7 @@ find_corrupted_byte(["48", "6c", "6F"])
 """
 import unittest
 from typing import Any, Callable, List, Tuple
+import re
 
 
 HEX = set("0123456789ABCDEF")
@@ -42,6 +43,13 @@ def find_corrupted_byte(dump: List[str]) -> int:
     Поиск ближайшего поврежденного байта.
     """
     return next((i for i, x in enumerate(dump) if len(x) != 2 or set(x) - HEX), -1)
+
+
+def find_corrupted_byte_2(dump: List[str]) -> int:
+    """
+    Поиск ближайшего поврежденного байта.
+    """
+    return next((i for i, x in enumerate(dump) if not re.fullmatch('[0-9A-F]{2}', x)), -1)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -59,6 +67,13 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(find_corrupted_byte, (
+        (["48", "65", "6C", "6C", "6F"], -1),
+        (["48", "65", "6G", "6C", "6F"], 2),
+        (["48", "6", "6C"], 1),
+        (["48", "6c", "6F"], 1),
+        (["FF", "00", "123"], 2),
+    ))
+    test(find_corrupted_byte_2, (
         (["48", "65", "6C", "6C", "6F"], -1),
         (["48", "65", "6G", "6C", "6F"], 2),
         (["48", "6", "6C"], 1),
