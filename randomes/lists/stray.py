@@ -14,6 +14,7 @@
 """
 import unittest
 from typing import Any, Callable, List, Tuple
+from functools import reduce
 
 
 def stray(arr: List[int]) -> int:
@@ -21,6 +22,14 @@ def stray(arr: List[int]) -> int:
     Определяет единственное числдо, отличающееся от остальных.
     """
     return [(res := res ^ x) if i else (res := x) for i, x in enumerate(arr)] and res
+
+
+
+def stray_2(arr: List[int]) -> int:
+    """
+    Определяет единственное числдо, отличающееся от остальных.
+    """
+    return reduce(lambda prev, curr: prev ^ curr, arr)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -38,6 +47,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(stray, (
+        ([1, 1, 1, 1, 1, 1, 2], 2),
+        ([2, 3, 2, 2, 2], 3),
+        ([3, 2, 2, 2, 2], 3),
+    ))
+    test(stray_2, (
         ([1, 1, 1, 1, 1, 1, 2], 2),
         ([2, 3, 2, 2, 2], 3),
         ([3, 2, 2, 2, 2], 3),
