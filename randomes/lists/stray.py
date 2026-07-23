@@ -24,12 +24,18 @@ def stray(arr: List[int]) -> int:
     return [(res := res ^ x) if i else (res := x) for i, x in enumerate(arr)] and res
 
 
-
 def stray_2(arr: List[int]) -> int:
     """
     Определяет единственное числдо, отличающееся от остальных.
     """
     return reduce(lambda prev, curr: prev ^ curr, arr)
+
+
+def stray_3(arr: List[int]) -> int:
+    """
+    Определяет единственное числдо, отличающееся от остальных.
+    """
+    return min(set(arr), key=arr.count)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -52,6 +58,11 @@ if __name__ == '__main__':
         ([3, 2, 2, 2, 2], 3),
     ))
     test(stray_2, (
+        ([1, 1, 1, 1, 1, 1, 2], 2),
+        ([2, 3, 2, 2, 2], 3),
+        ([3, 2, 2, 2, 2], 3),
+    ))
+    test(stray_3, (
         ([1, 1, 1, 1, 1, 1, 2], 2),
         ([2, 3, 2, 2, 2], 3),
         ([3, 2, 2, 2, 2], 3),
