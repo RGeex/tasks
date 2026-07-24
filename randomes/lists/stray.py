@@ -38,6 +38,14 @@ def stray_3(arr: List[int]) -> int:
     return min(set(arr), key=arr.count)
 
 
+def stray_4(arr: List[int]) -> int:
+    """
+    Определяет единственное числдо, отличающееся от остальных.
+    """
+    arr.sort()
+    return arr[-1] if arr[0] == arr[1] else arr[0]
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -63,6 +71,11 @@ if __name__ == '__main__':
         ([3, 2, 2, 2, 2], 3),
     ))
     test(stray_3, (
+        ([1, 1, 1, 1, 1, 1, 2], 2),
+        ([2, 3, 2, 2, 2], 3),
+        ([3, 2, 2, 2, 2], 3),
+    ))
+    test(stray_4, (
         ([1, 1, 1, 1, 1, 1, 2], 2),
         ([2, 3, 2, 2, 2], 3),
         ([3, 2, 2, 2, 2], 3),
