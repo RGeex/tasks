@@ -33,6 +33,13 @@ def who_is_serving(current_round: int) -> int:
     return [2, 1][current_round % 4 in (1, 2)]
 
 
+def who_is_serving_2(current_round: int) -> int:
+    """
+    Определяет подающего в указанном раунде.
+    """
+    return current_round - 1 & 2 or 1
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -48,6 +55,18 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(who_is_serving, (
+        (1, 1),
+        (2, 1),
+        (3, 2),
+        (4, 2),
+        (5, 1),
+        (6, 1),
+        (7, 2),
+        (8, 2),
+        (9, 1),
+        (10, 1),
+    ))
+    test(who_is_serving_2, (
         (1, 1),
         (2, 1),
         (3, 2),
