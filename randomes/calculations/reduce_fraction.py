@@ -11,6 +11,7 @@ example: [45, 120] --> [3, 8]
 """
 import unittest
 from typing import Any, Callable, Tuple
+from fractions import Fraction
 from math import gcd
 
 
@@ -19,6 +20,14 @@ def reduce_fraction(fraction: Tuple[int, int]) -> Tuple[int, int]:
     Приводит дроби к простейшей форме.
     """
     return tuple(i // gcd(*fraction) for i in fraction)
+
+
+def reduce_fraction_2(fraction: Tuple[int, int]) -> Tuple[int, int]:
+    """
+    Приводит дроби к простейшей форме.
+    """
+    tmp = Fraction(*fraction)
+    return (tmp.numerator, tmp.denominator)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -36,6 +45,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(reduce_fraction, (
+        ((60, 20), (3, 1)),
+        ((80, 120), (2, 3)),
+        ((4, 2), (2, 1)),
+        ((45, 120), (3, 8)),
+        ((1000, 1), (1000, 1)),
+        ((1, 1), (1, 1)),
+    ))
+    test(reduce_fraction_2, (
         ((60, 20), (3, 1)),
         ((80, 120), (2, 3)),
         ((4, 2), (2, 1)),
