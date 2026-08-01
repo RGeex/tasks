@@ -24,6 +24,13 @@ def new_fibonachi(n: int) -> str:
     return a
 
 
+def new_fibonachi_2(n: int) -> str:
+    """
+    Последовательность фибоначи для заданного условия цепочки.
+    """
+    return "0" if n == 0 else "01" if n == 1 else new_fibonachi_2(n-1) + new_fibonachi_2(n-2)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -39,6 +46,13 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(new_fibonachi, (
+        (0,'0'),
+        (1,'01'),
+        (2,'010'),
+        (3,'01001'),
+        (5,'0100101001001'),
+    ))
+    test(new_fibonachi_2, (
         (0,'0'),
         (1,'01'),
         (2,'010'),
