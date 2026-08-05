@@ -38,6 +38,13 @@ def over_the_road_2(address: int, n: int) -> int:
     return n * 2 + 1 - address
 
 
+def over_the_road_3(address: int, n: int) -> int:
+    """
+    определяет номер дома на противоположной стороне.
+    """
+    return n + n - ~ - address
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -61,6 +68,14 @@ if __name__ == '__main__':
         ((23633656673, 310027696726), 596421736780),
     ))
     test(over_the_road_2, (
+        ((1, 3), 6),
+        ((3, 3), 4),
+        ((2, 3), 5),
+        ((3, 5), 8),
+        ((7, 11), 16),
+        ((23633656673, 310027696726), 596421736780),
+    ))
+    test(over_the_road_3, (
         ((1, 3), 6),
         ((3, 3), 4),
         ((2, 3), 5),
