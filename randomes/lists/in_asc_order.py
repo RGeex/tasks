@@ -26,6 +26,9 @@ from typing import Any, Callable, List, Tuple
 
 
 def in_asc_order(arr: List[int]) -> bool:
+    """
+    Определяет, расположены ли числа в порядке возрастания.
+    """
     return next((False for i, n in enumerate(arr) if i and arr[i - 1] > n), True)
 
 
