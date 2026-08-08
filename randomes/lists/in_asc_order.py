@@ -32,6 +32,13 @@ def in_asc_order(arr: List[int]) -> bool:
     return next((False for i, n in enumerate(arr) if i and arr[i - 1] > n), True)
 
 
+def in_asc_order_2(arr: List[int]) -> bool:
+    """
+    Определяет, расположены ли числа в порядке возрастания.
+    """
+    return arr == sorted(arr)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -47,6 +54,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(in_asc_order, (
+        ([1, 2], True),
+        ([2, 1], False),
+        ([1, 2, 3], True),
+        ([1, 3, 2], False),
+        ([1, 4, 13, 97, 508, 1047, 20058], True),
+        ([56, 98, 123, 67, 742, 1024, 32, 90969], False),
+    ))
+    test(in_asc_order_2, (
         ([1, 2], True),
         ([2, 1], False),
         ([1, 2, 3], True),
