@@ -36,6 +36,13 @@ def max_multiple(divisor: int, bound: int) -> int:
     return bound // divisor * divisor
 
 
+def max_multiple_2(divisor: int, bound: int) -> int:
+    """
+    Поиск наибольшего N удовлетворяющих условию.
+    """
+    return bound - bound % divisor
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -51,6 +58,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(max_multiple, (
+        ((2, 7), 6),
+        ((3, 10), 9),
+        ((7, 17), 14),
+        ((10, 50), 50),
+        ((37, 200), 185),
+        ((7, 100), 98),
+    ))
+    test(max_multiple_2, (
         ((2, 7), 6),
         ((3, 10), 9),
         ((7, 17), 14),
