@@ -39,6 +39,13 @@ def array_packing(arr: List[int]) -> int:
     return int(''.join([f'{x:08b}' for x in arr][::-1]), 2)
 
 
+def array_packing_2(arr: List[int]) -> int:
+    """
+    Упаковывает переданныые числа в одно.
+    """
+    return int.from_bytes(arr, 'little')
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -54,6 +61,13 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(array_packing, (
+        ([24, 85, 0], 21784),
+        ([23, 45, 39], 2567447),
+        ([1, 1], 257),
+        ([0], 0),
+        ([255, 255, 255, 255], 4294967295),
+    ))
+    test(array_packing_2, (
         ([24, 85, 0], 21784),
         ([23, 45, 39], 2567447),
         ([1, 1], 257),
