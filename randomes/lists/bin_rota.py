@@ -44,6 +44,13 @@ def bin_rota(arr: List[List[str]]) -> List[str]:
     return [name for i, row in enumerate(arr) for name in (reversed(row) if i & 1 else row)]
 
 
+def bin_rota_2(arr: List[List[str]]) -> List[str]:
+    """
+    Создает порядок сотрудников очередности отчистки корзины.
+    """
+    return sum([x[::(-1)**(i)] for i, x in enumerate(arr)], [])
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -59,6 +66,32 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(bin_rota, (
+        ([
+            ["Bob", "Nora"],
+            ["Ruby", "Carl"],
+        ],
+        ["Bob", "Nora", "Carl", "Ruby"]),
+        ([["Billy"]], ["Billy"]),
+        ([["Billy", "Nancy"]], ["Billy", "Nancy"]),
+        ([
+            ["Billy"],
+            ["Megan"],
+            ["Aki"],
+            ["Arun"],
+            ["Joy"]],
+        ["Billy", "Megan", "Aki", "Arun", "Joy"]),
+        ([
+            ["Sam", "Nina", "Tim", "Helen", "Gurpreet", "Edward", "Holly", "Eliza"],
+            ["Billy", "Megan", "Aki", "Arun", "Joy", "Anish", "Lee", "Maryan"],
+            ["Nick", "Josh", "Pete", "Kavita", "Daisy", "Francesca", "Alfie", "Macy"]], ["Sam", "Nina", "Tim", "Helen", "Gurpreet", "Edward", "Holly", "Eliza", "Maryan", "Lee", "Anish", "Joy", "Arun", "Aki", "Megan", "Billy", "Nick", "Josh", "Pete", "Kavita", "Daisy", "Francesca", "Alfie", "Macy"]),
+        ([
+            ["Stefan", "Raj", "Marie"],
+            ["Alexa", "Amy", "Edward"],
+            ["Liz", "Claire", "Juan"],
+            ["Dee", "Luke", "Elle"]],
+            ["Stefan", "Raj", "Marie", "Edward", "Amy", "Alexa", "Liz", "Claire", "Juan", "Elle", "Luke", "Dee"]),
+    ))
+    test(bin_rota_2, (
         ([
             ["Bob", "Nora"],
             ["Ruby", "Carl"],
