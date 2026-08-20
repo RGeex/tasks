@@ -47,6 +47,13 @@ def introverted_seat(seats: str) -> str | None:
             return s
 
 
+def introverted_seat_2(seats: str) -> str | None:
+    """
+    Выбирает место с минимальным кол-вом соседей.
+    """
+    return next((s for r in (r'\b0\b', r'\b0|0\b') if (s := re.sub(r, '1', seats, 1)) != seats), None)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -62,6 +69,16 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(introverted_seat, (
+        ("000", "100"),
+        ("000 01", "100 01"),
+        ("101 00", "101 10"),
+        ("111 001", "111 101"),
+        ("101 10", "101 11"),
+        ("11010", "11011"),
+        ("10001 0", "10001 1"),
+        ("10101", None)
+    ))
+    test(introverted_seat_2, (
         ("000", "100"),
         ("000 01", "100 01"),
         ("101 00", "101 10"),
