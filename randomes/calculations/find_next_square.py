@@ -23,6 +23,14 @@ def find_next_square(sq: int) -> int:
     return (x + 1) ** 2 if (x := sq ** .5).is_integer() else -1
 
 
+def find_next_square_2(sq: int) -> int:
+    """
+    Определяет следующий кведрат, если текущий так же явзяется квадроатом.
+    """
+    sq = sq**(1/2)
+    return -1 if sq % 1 != 0 else int(sq+1)**2
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -38,6 +46,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(find_next_square, (
+        (121, 144),
+        (625, 676),
+        (319225, 320356),
+        (15241383936, 15241630849),
+        (155, -1),
+        (342786627, -1),
+    ))
+    test(find_next_square_2, (
         (121, 144),
         (625, 676),
         (319225, 320356),
