@@ -22,6 +22,13 @@ def find_deleted_number(arr: List[int], mixed_arr: List[int]) -> int:
     return max(set(arr + [0]) - set(mixed_arr))
 
 
+def find_deleted_number_2(arr: List[int], mixed_arr: List[int]) -> int:
+    """
+    Поиск удаленного числа в списке.
+    """
+    return sum(arr) - sum(mixed_arr)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -37,6 +44,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(find_deleted_number, (
+        (([1, 2, 3, 4, 5], [3, 4, 1, 5]), 2),
+        (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 9, 7, 4, 6, 2, 3, 8]), 5),
+        (([1, 2, 3, 4, 5, 6, 7, 8, 9], [5, 7, 6, 9, 4, 8, 1, 2, 3]), 0),
+    ))
+    test(find_deleted_number_2, (
         (([1, 2, 3, 4, 5], [3, 4, 1, 5]), 2),
         (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 9, 7, 4, 6, 2, 3, 8]), 5),
         (([1, 2, 3, 4, 5, 6, 7, 8, 9], [5, 7, 6, 9, 4, 8, 1, 2, 3]), 0),
