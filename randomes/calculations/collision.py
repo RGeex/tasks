@@ -18,6 +18,13 @@ def collision(x1: int | float, y1: int | float, radius1: int | float, x2: int | 
     return radius1+radius2 >= dist((x1, y1), (x2, y2))
 
 
+def collision_2(x1: int | float, y1: int | float, radius1: int | float, x2: int | float, y2: int | float, radius2: int | float) -> bool:
+    """
+    Определяет пересекаются ли окружности.
+    """
+    return ((x1-x2)**2 + (y1-y2)**2)**.5 - radius2 - radius1 <= 0
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -33,6 +40,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(collision, (
+        ((1, 1, 1, 1.1, 1.1, 0.1), True),
+        ((-1, 1, 10, -10.1, 1.1, 1), True),
+        ((-5, 5, 5.0001, 5, -5, 5*sqrt(5)), True),
+        ((1, 1, 0.01, 1, 1.1, 0.01), False),
+        ((-1, 1, 6, -10.1, 1.1, 1), False),
+        ((-5, 5, 5.0001, 5, -5, 4*sqrt(5)), False),
+    ))
+    test(collision_2, (
         ((1, 1, 1, 1.1, 1.1, 0.1), True),
         ((-1, 1, 10, -10.1, 1.1, 1), True),
         ((-5, 5, 5.0001, 5, -5, 5*sqrt(5)), True),
