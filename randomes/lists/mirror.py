@@ -32,6 +32,13 @@ def mirror(data: List[int]) -> List[int]:
     return sorted(data) + sorted(data)[::-1][1:]
 
 
+def mirror_2(data: List[int]) -> List[int]:
+    """
+    Создает зеркальный список из указанного.
+    """
+    return (x := sorted(data))[:-1] + x[::-1]
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -47,6 +54,15 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(mirror, (
+        ([], []),
+        ([1], [1]),
+        ([2, 1], [1, 2, 1]),
+        ([1, 3, 2], [1, 2, 3, 2, 1]),
+        ([-8, 42, 18, 0, -16], [-16, -8, 0, 18, 42, 18, 0, -8, -16]),
+        ([-3, 15, 8, -1, 7, -1], [-3, -1, -1, 7, 8, 15, 8, 7, -1, -1, -3]),
+        ([-5, 10, 8, 10, 2, -3, 10], [-5, -3, 2, 8, 10, 10, 10, 10, 10, 8, 2, -3, -5]),
+    ))
+    test(mirror_2, (
         ([], []),
         ([1], [1]),
         ([2, 1], [1, 2, 1]),
