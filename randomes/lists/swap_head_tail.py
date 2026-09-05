@@ -27,6 +27,14 @@ def swap_head_tail(arr: List[int]) -> List[int]:
     return arr[a + b:] + arr[a:a + b] + arr[:a]
 
 
+def swap_head_tail_2(arr: List[int]) -> List[int]:
+    """
+    Меняет местами начало и конец списка.
+    """
+    x = len(arr) // 2
+    return arr[-x:] + arr[x:-x] + arr[:x]
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -42,6 +50,12 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(swap_head_tail, (
+        ([1, 2, 3, 4, 5], [4, 5, 3, 1, 2]),
+        ([-1, 2], [2, -1]),
+        ([1, 2, -3, 4, 5, 6, -7, 8], [5, 6, -7, 8, 1, 2, -3, 4]),
+        ([1], [1]),
+    ))
+    test(swap_head_tail_2, (
         ([1, 2, 3, 4, 5], [4, 5, 3, 1, 2]),
         ([-1, 2], [2, -1]),
         ([1, 2, -3, 4, 5, 6, -7, 8], [5, 6, -7, 8, 1, 2, -3, 4]),
