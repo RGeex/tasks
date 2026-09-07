@@ -28,6 +28,13 @@ def stack_height_2d(layers: int) -> int:
     return round((1 + 3**0.5 * (layers - 1) / 2), 3) if layers > 0 else 0
 
 
+def stack_height_2d_2(layers: int) -> int:
+    """
+    Определяет высоту стопки.
+    """
+    return layers and 1 + (layers - 1) * ((3**.5) / 2)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -43,5 +50,8 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(stack_height_2d, (
+        (1, 1),
+    ))
+    test(stack_height_2d_2, (
         (1, 1),
     ))
