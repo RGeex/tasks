@@ -23,6 +23,13 @@ def split_by_value(k: int, elements: List[int]) -> List[int]:
     return [b for a in res for b in a]
 
 
+def split_by_value_2(k: int, elements: List[int]) -> List[int]:
+    """
+    Сортирует элементы.
+    """
+    return sorted(elements, key=lambda x: x >= k)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -39,6 +46,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 if __name__ == '__main__':
     test(split_by_value, (
         ((5, [1, 3, 5, 7, 6, 4, 2]), [1, 3, 4, 2, 5, 7, 6]),
-        ((0, [5, 2, 7, 3, 2]),[5, 2, 7, 3, 2]),
-        ((6, [6, 4, 10, 10, 6]),[4, 6, 10, 10, 6]),
+        ((0, [5, 2, 7, 3, 2]), [5, 2, 7, 3, 2]),
+        ((6, [6, 4, 10, 10, 6]), [4, 6, 10, 10, 6]),
+    ))
+    test(split_by_value_2, (
+        ((5, [1, 3, 5, 7, 6, 4, 2]), [1, 3, 4, 2, 5, 7, 6]),
+        ((0, [5, 2, 7, 3, 2]), [5, 2, 7, 3, 2]),
+        ((6, [6, 4, 10, 10, 6]), [4, 6, 10, 10, 6]),
     ))
