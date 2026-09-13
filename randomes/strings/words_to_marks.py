@@ -22,6 +22,13 @@ def words_to_marks(s: str) -> int:
     return sum(ord(x) - 96 for x in s)
 
 
+def words_to_marks_2(s: str) -> int:
+    """
+    Вычисляет значение слова на основе суммы позиций букв.
+    """
+    return sum('_abcdefghijklmnopqrstuvwxyz'.index(i) for i in s)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -37,6 +44,13 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(words_to_marks, (
+        ('attitude', 100),
+        ('friends', 75),
+        ('family', 66),
+        ('selfness', 99),
+        ('knowledge', 96),
+    ))
+    test(words_to_marks_2, (
         ('attitude', 100),
         ('friends', 75),
         ('family', 66),
