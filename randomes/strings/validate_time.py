@@ -19,6 +19,13 @@ def validate_time(time: str) -> bool:
     return bool(re.match(r'^([01]?\d|2[0-3]):[0-5]\d$', time))
 
 
+def validate_time_2(time: str) -> bool:
+    """
+    Проверяет правильность введенного времени.
+    """
+    return bool(re.match(r'(2[0-3]|[01]?\d):[0-5]\d$', time))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -34,6 +41,22 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(validate_time, (
+        ('1:00', True),
+        ('13:1', False),
+        ('12:60', False),
+        ('12: 60', False),
+        ('24:00', False),
+        ('00:00', True),
+        ('24o:00', False),
+        ('24:000', False),
+        ('', False),
+        ('09:00', True),
+        ('2400', False),
+        ('foo12:00bar', False),
+        ('010:00', False),
+        ('1;00', False),
+    ))
+    test(validate_time_2, (
         ('1:00', True),
         ('13:1', False),
         ('12:60', False),
