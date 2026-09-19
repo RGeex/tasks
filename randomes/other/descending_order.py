@@ -21,6 +21,13 @@ def descending_order(num: int) -> int:
     return int(''.join(sorted(str(num), reverse=True)))
 
 
+def descending_order_2(num: int) -> int:
+    """
+    Из переданного числа создает максимальное.
+    """
+    return int(''.join(sorted(str(num))[::-1]))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -36,6 +43,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(descending_order, (
+        (0, 0),
+        (15, 51),
+        (123456789, 987654321),
+    ))
+    test(descending_order_2, (
         (0, 0),
         (15, 51),
         (123456789, 987654321),
