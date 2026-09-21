@@ -12,6 +12,7 @@
 """
 import unittest
 from typing import Any, Callable, List, Tuple
+from itertools import combinations
 
 
 def digits(n: int) -> List[int]:
@@ -19,6 +20,13 @@ def digits(n: int) -> List[int]:
     Из заданного числа сиздает список сумм всех его чисел.
     """
     return [int(a) + int(b) for i, a in enumerate(str(n)[:-1], 1) for b in str(n)[i:]]
+
+
+def digits_2(n: int) -> List[int]:
+    """
+    Из заданного числа сиздает список сумм всех его чисел.
+    """
+    return [int(a) + int(b) for a, b in combinations(str(n), 2)]
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -36,6 +44,15 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(digits, (
+        (12345, [ 3, 4, 5, 6, 5, 6, 7, 7, 8, 9 ]),
+        (6, []),
+        (156, [ 6, 7, 11 ]),
+        (81596, [ 9, 13, 17, 14, 6, 10, 7, 14, 11, 15 ]),
+        (3852, [ 11, 8, 5, 13, 10, 7 ]),
+        (3264128, [ 5, 9, 7, 4, 5, 11, 8, 6, 3, 4, 10, 10, 7, 8, 14, 5, 6, 12, 3, 9, 10 ]),
+        (999999, [ 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 ]),
+    ))
+    test(digits_2, (
         (12345, [ 3, 4, 5, 6, 5, 6, 7, 7, 8, 9 ]),
         (6, []),
         (156, [ 6, 7, 11 ]),
