@@ -30,6 +30,13 @@ def small_enough_3(array: List[int], limit: int) -> bool:
     return all(n <= limit for n in array)
 
 
+def small_enough_4(array: List[int], limit: int) -> bool:
+    """
+    Проверяет все ли числа из списка не превышают лимит.
+    """
+    return max(array) <= limit
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -65,6 +72,16 @@ if __name__ == '__main__':
         ([[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12], 12], True),
     ))
     test(small_enough_3, (
+        ([[66, 101], 200], True),
+        ([[78, 117, 110, 99, 104, 117, 107, 115], 100], False),
+        ([[101, 45, 75, 105, 99, 107], 107], True),
+        ([[80, 117, 115, 104, 45, 85, 112, 115], 120], True),
+        ([[1, 1, 1, 1, 1, 2], 1], False),
+        ([[78, 33, 22, 44, 88, 9, 6], 87], False),
+        ([[1, 2, 3, 4, 5, 6, 7, 8, 9], 10], True),
+        ([[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12], 12], True),
+    ))
+    test(small_enough_4, (
         ([[66, 101], 200], True),
         ([[78, 117, 110, 99, 104, 117, 107, 115], 100], False),
         ([[101, 45, 75, 105, 99, 107], 107], True),
