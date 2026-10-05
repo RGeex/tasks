@@ -19,6 +19,13 @@ def number_of_occurrences(element: int, sample: List[int]) -> int:
     return sample.count(element)
 
 
+def number_of_occurrences_2(element: int, sample: List[int]) -> int:
+    """
+    Подсчитывает кол-во вхождений элемента в списке.
+    """
+    return sum(1 for x in sample if x == element)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -35,6 +42,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 if __name__ == '__main__':
     sample = [0, 1, 2, 2, 3]
     test(number_of_occurrences, (
+        ((4, sample), 0),
+        ((6, sample), 0),
+        ((-1, sample), 0),
+        ((0, sample), 1),
+        ((2, sample), 2),
+        ((3, sample), 1),
+    ))
+    test(number_of_occurrences_2, (
         ((4, sample), 0),
         ((6, sample), 0),
         ((-1, sample), 0),
