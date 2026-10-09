@@ -25,6 +25,13 @@ def digit_multiplication_2(expression: str) -> int:
     return eval(re.sub(r'(?<=\d)(?=\d)', '*', expression))
 
 
+def digit_multiplication_3(expression: str) -> int:
+    """
+    Перемножает соседние цифры, а затем вытолняет дрпугим математические операции.
+    """
+    return eval(re.sub("\B", "*", expression))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -49,6 +56,15 @@ if __name__ == '__main__':
         ('355+43', 87),
     ))
     test(digit_multiplication_2, (
+        ('10000345+77-2', 47),
+        ('12345-11989+1231111', -522),
+        ('2395', 270),
+        ('3434343-12121212+4949494-122', 191788),
+        ('13579+9+9+9-11', 971),
+        ('6-3-3-3-4', -7),
+        ('355+43', 87),
+    ))
+    test(digit_multiplication_3, (
         ('10000345+77-2', 47),
         ('12345-11989+1231111', -522),
         ('2395', 270),
