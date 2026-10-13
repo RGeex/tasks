@@ -22,6 +22,13 @@ def duplicate_elements_2(m: List[int], n: List[int]) -> bool:
     return not set(m).isdisjoint(n)
 
 
+def duplicate_elements_3(m: List[int], n: List[int]) -> bool:
+    """
+    Проверяет, есть ли общие элементы в 2-х списках.
+    """
+    return any(x in n for x in m)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -48,6 +55,17 @@ if __name__ == '__main__':
         (([], []), False),
     ))
     test(duplicate_elements_2, (
+        (([1, 2, 3, 4, 5], [1, 6, 7, 8, 9]), True),
+        (([9, 8, 7], [8, 1, 3]), True),
+        (([-2, -4, -6, -8], [-2, -3, -5, -7]), True),
+        (([-9, -8, -7], [-8, -1, -3]), True),
+        (([1, 3, 5, 7, 9], [2, 4, 6, 8]), False),
+        (([9, 8, 7], [6, 5, 4]), False),
+        (([], [9, 8, 7, 6, 5]), False),
+        (([9, 8, 7, 6, 5], []), False),
+        (([], []), False),
+    ))
+    test(duplicate_elements_3, (
         (([1, 2, 3, 4, 5], [1, 6, 7, 8, 9]), True),
         (([9, 8, 7], [8, 1, 3]), True),
         (([-2, -4, -6, -8], [-2, -3, -5, -7]), True),
