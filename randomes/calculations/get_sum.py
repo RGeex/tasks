@@ -47,6 +47,14 @@ def get_sum_4(a: int, b: int) -> int:
     return (a + b) * (abs(a - b) + 1) // 2
 
 
+def get_sum_5(a: int, b: int) -> int:
+    """
+    Вычисляет сумму чисел в диапазоне заданным 2-мя числами.
+    """
+    a, b = (b, a) if a > b else (a, b)
+    return sum(range(a, b + 1))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -74,6 +82,10 @@ if __name__ == '__main__':
         ((0, -1), -1),
     ))
     test(get_sum_4, (
+        ((0, 1), 1),
+        ((0, -1), -1),
+    ))
+    test(get_sum_5, (
         ((0, 1), 1),
         ((0, -1), -1),
     ))
