@@ -24,6 +24,18 @@ def shift_left(a: str, b: str) -> int:
     return min(i+j for i in range(len(a)+1) for j in range(len(b)+1) if a[i:] == b[j:])
 
 
+def shift_left_2(a: str, b: str, n: int = 0) -> int:
+    """
+    Определяет, кол-во букв которые следует удалить, что бы слова стали одинаковыми.
+    """
+    if a == b:
+        return n
+    elif len(a) > len(b):
+        return shift_left_2(a[1:], b, n + 1)
+    else:
+        return shift_left_2(a, b[1:], n + 1)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -39,6 +51,11 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(shift_left, (
+        (("test", "west"), 2),
+        (("test", "yes"), 7),
+        (("b", "ab"), 1),
+    ))
+    test(shift_left_2, (
         (("test", "west"), 2),
         (("test", "yes"), 7),
         (("b", "ab"), 1),
