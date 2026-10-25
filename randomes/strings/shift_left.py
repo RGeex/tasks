@@ -15,6 +15,7 @@
 """
 import unittest
 from typing import Any, Callable, Tuple
+import os
 
 
 def shift_left(a: str, b: str) -> int:
@@ -48,6 +49,14 @@ def shift_left_3(a: str, b: str, n: int = 0) -> int:
     return r
 
 
+def shift_left_4(a: str, b: str, n: int = 0) -> int:
+    """
+    Определяет, кол-во букв которые следует удалить, что бы слова стали одинаковыми.
+    """
+    x = os.path.commonprefix([a[::-1], b[::-1]])
+    return len(a) + len(b) - len(x) * 2
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -73,6 +82,11 @@ if __name__ == '__main__':
         (("b", "ab"), 1),
     ))
     test(shift_left_3, (
+        (("test", "west"), 2),
+        (("test", "yes"), 7),
+        (("b", "ab"), 1),
+    ))
+    test(shift_left_4, (
         (("test", "west"), 2),
         (("test", "yes"), 7),
         (("b", "ab"), 1),
