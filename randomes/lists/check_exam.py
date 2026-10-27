@@ -28,6 +28,13 @@ def check_exam(arr1: List[str], arr2: List[str]) -> int:
     return x if (x := sum([-1, 4][a == b] if b else 0 for a, b in zip(arr1, arr2))) > 0 else 0
 
 
+def check_exam_2(arr1: List[str], arr2: List[str]) -> int:
+    """
+    Определяет балл набранный студентом.
+    """
+    return max(0, sum(4 if a == b else -1 for a, b in zip(arr1, arr2) if b))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -43,6 +50,12 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(check_exam, (
+        ((["a", "a", "b", "b"], ["a", "c", "b", "d"]), 6),
+        ((["a", "a", "c", "b"], ["a", "a", "b",  ""]), 7),
+        ((["a", "a", "b", "c"], ["a", "a", "b", "c"]), 16),
+        ((["b", "c", "b", "a"], ["",  "a", "a", "c"]), 0),
+    ))
+    test(check_exam_2, (
         ((["a", "a", "b", "b"], ["a", "c", "b", "d"]), 6),
         ((["a", "a", "c", "b"], ["a", "a", "b",  ""]), 7),
         ((["a", "a", "b", "c"], ["a", "a", "b", "c"]), 16),
