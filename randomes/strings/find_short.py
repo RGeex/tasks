@@ -14,6 +14,13 @@ def find_short(s: str) -> int:
     return len(min(s.split(), key=len))
 
 
+def find_short_2(s: str) -> int:
+    """
+    Определяет длину самого короткого слова в строке.
+    """
+    return min(len(x) for x in s.split())
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -29,6 +36,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(find_short, (
+        ("bitcoin take over the world maybe who knows perhaps", 3),
+        ("turns out random test cases are easier than writing out basic ones", 3),
+        ("lets talk about javascript the best language", 3),
+        ("i want to travel the world writing code one day", 1),
+        ("Lets all go on holiday somewhere very cold", 2)   ,
+        ("Let's travel abroad shall we", 2),
+    ))
+    test(find_short_2, (
         ("bitcoin take over the world maybe who knows perhaps", 3),
         ("turns out random test cases are easier than writing out basic ones", 3),
         ("lets talk about javascript the best language", 3),
