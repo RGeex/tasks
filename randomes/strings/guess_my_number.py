@@ -28,6 +28,13 @@ def guess_my_number(guess: str, number: str = '123-451-2345') -> str:
     return "".join(["#", x][x in guess + "-"] for x in number)
 
 
+def guess_my_number_2(guess: str, number: str = '123-451-2345') -> str:
+    """
+    Заменят цифры в строке на # кроме указанных.
+    """
+    return ''.join(i if i in guess+'-' else '#' for i in number)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -43,6 +50,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(guess_my_number, (
+        (('0'), '###-###-####'),
+        (('01',), '1##-##1-####'),
+        (('012',), '12#-##1-2###'),
+        (('0123',), '123-##1-23##'),
+        (('01234',), '123-4#1-234#'),
+        (('012345',), '123-451-2345'),
+    ))
+    test(guess_my_number_2, (
         (('0'), '###-###-####'),
         (('01',), '1##-##1-####'),
         (('012',), '12#-##1-2###'),
