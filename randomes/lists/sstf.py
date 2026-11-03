@@ -56,6 +56,20 @@ def sstf(request_queue: List[int], initial_head_position: int) -> int:
     return result
 
 
+def sstf_2(request_queue: List[int], initial_head_position: int) -> int:
+    """
+    Определяет кол-во шагов головки.
+    """
+    result = 0
+    request_queue_copy = request_queue.copy()
+    while request_queue_copy:
+        x = min(request_queue_copy, key=lambda x: abs(x - initial_head_position))
+        result += abs(x - initial_head_position)
+        request_queue_copy.remove(x)
+        initial_head_position = x
+    return result
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -71,6 +85,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(sstf, (
+        (([], 12), 0),
+        (([98, 183, 37, 122, 14, 124, 65, 67], 53), 236),
+        (([33, 25, 109, 201, 15, 22], 83), 306),
+        (([110, 3, 15, 90, 33, 12, 16], 100), 117),
+        (([23, 50, 97, 11, 102, 1], 60), 160),
+        (([40, 60, 70], 50), 40),
+    ))
+    test(sstf_2, (
         (([], 12), 0),
         (([98, 183, 37, 122, 14, 124, 65, 67], 53), 236),
         (([33, 25, 109, 201, 15, 22], 83), 306),
