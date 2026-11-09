@@ -39,6 +39,13 @@ def next_happy_year(year: int) -> int:
     return year
 
 
+def next_happy_year_2(year: int) -> int:
+    """
+    Вычисляет следующий год с уникальными цифрами.
+    """
+    return year if len(set(str(year := year + 1))) == 4 else next_happy_year_2(year)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -54,6 +61,18 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(next_happy_year, (
+        (1001, 1023),
+        (1123, 1203),
+        (2001, 2013),
+        (2334, 2340),
+        (3331, 3401),
+        (1987, 2013),
+        (5555, 5601),
+        (7712, 7801),
+        (8088, 8091),
+        (8999, 9012),
+    ))
+    test(next_happy_year_2, (
         (1001, 1023),
         (1123, 1203),
         (2001, 2013),
