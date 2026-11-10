@@ -34,7 +34,7 @@ def next_happy_year(year: int) -> int:
     """
     Вычисляет следующий год с уникальными цифрами.
     """
-    while len(set(str(year := year + 1))) != 4:
+    while len(set(str(year := year + 1))) != len(str(year)):
         pass
     return year
 
@@ -43,7 +43,7 @@ def next_happy_year_2(year: int) -> int:
     """
     Вычисляет следующий год с уникальными цифрами.
     """
-    return year if len(set(str(year := year + 1))) == 4 else next_happy_year_2(year)
+    return year if len(set(str(year := year + 1))) == len(str(year)) else next_happy_year_2(year)
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
