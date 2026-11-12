@@ -42,6 +42,13 @@ def rounders(value: int) -> int:
     return value
 
 
+def rounders_2(value: int) -> int:
+    """
+    Округляет число учитывая каждую цифру отдельно.
+    """
+    return value if value < 10 else 10 * rounders(value // 10 + (value % 10 >= 5))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -57,6 +64,14 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(rounders, (
+        (15, 20),
+        (1234, 1000),
+        (1445, 2000),
+        (14, 10),
+        (99, 100),
+        (10, 10),
+    ))
+    test(rounders_2, (
         (15, 20),
         (1234, 1000),
         (1445, 2000),
