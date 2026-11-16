@@ -22,6 +22,7 @@ import unittest
 from typing import Any, Callable, Tuple
 from functools import reduce
 from operator import mul
+from math import prod
 
 
 def strong_enough(earthquake: list[list[int]], age: int) -> str:
@@ -36,6 +37,13 @@ def strong_enough_2(earthquake: list[list[int]], age: int) -> str:
     Опрделят выстоит или обрушится здание после земятресения.
     """
     return ["Needs Reinforcement!", "Safe!"][sum(earthquake[0]) * sum(earthquake[1]) * sum(earthquake[2]) < 1000 * ((0.99)** age)]
+
+
+def strong_enough_3(earthquake: list[list[int]], age: int) -> str:
+    """
+    Опрделят выстоит или обрушится здание после земятресения.
+    """
+    return ["Safe!", "Needs Reinforcement!"][prod(map(sum, earthquake)) > 1000 * 0.99 ** age]
 
 
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
@@ -65,6 +73,18 @@ if __name__ == '__main__':
         (([[1, 1, 1], [1, 1, 1], [1, 1, 1]], 325), "Safe!"),
     ))
     test(strong_enough_2, (
+        (([[2, 3, 1], [3, 1, 1], [1, 1, 2]], 2), "Safe!"),
+        (([[5, 8, 7], [3, 3, 1], [4, 1, 2]], 2), "Safe!"),
+        (([[5, 8, 7], [3, 3, 1], [4, 1, 2]], 3), "Needs Reinforcement!"),
+        (([[5, 1, 7], [1, 1, 1], [4, 1, 2]], 100), "Safe!"),
+        (([[5, 1, 7], [1, 1, 7], [4, 1, 2]], 50), "Needs Reinforcement!"),
+        (([[5, 8, 7], [1, 1, 1], [6, 6, 1]], 25), "Needs Reinforcement!"),
+        (([[5, 8, 7], [1, 1, 1], [6, 6, 1]], 20), "Safe!"),
+        (([[1, 8, 7], [1, 3, 1], [6, 2, 1]], 30), "Safe!"),
+        (([[1, 1, 6], [1, 1, 10], [6, 10, 1]], 2), "Needs Reinforcement!"),
+        (([[1, 1, 1], [1, 1, 1], [1, 1, 1]], 325), "Safe!"),
+    ))
+    test(strong_enough_3, (
         (([[2, 3, 1], [3, 1, 1], [1, 1, 2]], 2), "Safe!"),
         (([[5, 8, 7], [3, 3, 1], [4, 1, 2]], 2), "Safe!"),
         (([[5, 8, 7], [3, 3, 1], [4, 1, 2]], 3), "Needs Reinforcement!"),
