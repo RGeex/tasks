@@ -24,6 +24,13 @@ def root(x: int | float, n: int) -> float:
     return x ** (1 / n)
 
 
+def root_2(x: int | float, n: int) -> float:
+    """
+    Вычисляет степень возведения.
+    """
+    return x ** (n ** -1)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -39,6 +46,10 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(root, (
+        ((8, 3), 2),
+        ((6.25, 2), 2.5),
+    ))
+    test(root_2, (
         ((8, 3), 2),
         ((6.25, 2), 2.5),
     ))
