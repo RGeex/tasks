@@ -55,6 +55,13 @@ def to_leet_speak_2(s: str) -> str:
     return s.translate(str.maketrans("ABCEGHILOSTZ", "@8(36#!10$72"))
 
 
+def to_leet_speak_3(s: str) -> str:
+    """
+    Заменяет указанные буквы на заданные символы в строке.
+    """
+    return "".join(abc.get(x, x) for x in s)
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -77,6 +84,13 @@ if __name__ == '__main__':
         ("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG", "7#3 QU!(K 8R0WN F0X JUMP$ 0V3R 7#3 1@2Y D06"),
     ))
     test(to_leet_speak_2, (
+        ("LEET", "1337"),
+        ("CODEWARS", "(0D3W@R$"),
+        ("HELLO WORLD", "#3110 W0R1D"),
+        ("LOREM IPSUM DOLOR SIT AMET", "10R3M !P$UM D010R $!7 @M37"),
+        ("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG", "7#3 QU!(K 8R0WN F0X JUMP$ 0V3R 7#3 1@2Y D06"),
+    ))
+    test(to_leet_speak_3, (
         ("LEET", "1337"),
         ("CODEWARS", "(0D3W@R$"),
         ("HELLO WORLD", "#3110 W0R1D"),
