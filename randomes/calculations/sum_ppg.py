@@ -22,6 +22,13 @@ def sum_ppg(player_one: Dict, player_two: Dict) -> float:
     return sum(x["ppg"] for x in [player_one, player_two])
 
 
+def sum_ppg_2(player_one: Dict, player_two: Dict) -> float:
+    """
+    Определяет общий счет 2-х игроков.
+    """
+    return player_one["ppg"] + player_two["ppg"]
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -37,5 +44,8 @@ def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
 
 if __name__ == '__main__':
     test(sum_ppg, (
+        (({ 'team': '76ers', 'ppg': 11.2 }, { 'team': 'bulls', 'ppg': 20.2 }), 31.4),
+    ))
+    test(sum_ppg_2, (
         (({ 'team': '76ers', 'ppg': 11.2 }, { 'team': 'bulls', 'ppg': 20.2 }), 31.4),
     ))
