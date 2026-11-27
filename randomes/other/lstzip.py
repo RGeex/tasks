@@ -28,6 +28,13 @@ def lstzip(a: list, b: list, fn: Callable) -> list:
     return list(starmap(fn, zip(a, b)))
 
 
+def lstzip_2(a: list, b: list, fn: Callable) -> list:
+    """
+    Объединяет соответствующие элементы двух последовательностей, используя заданную функцию-селектор.
+    """
+    return list(map(fn, a, b))
+
+
 def test(func: Callable[[Any], Any], data: Tuple[Tuple[Any, Any], ...]) -> None:
     """Тестирование работы алгоритмов с помощью unittest."""
 
@@ -45,6 +52,11 @@ if __name__ == '__main__':
     a = [1, 2, 3, 4, 5]
     b = ['a','b','c','d','e']
     test(lstzip, (
+        ((a, b, lambda a, b: str(a) + str(b)), ["1a", "2b", "3c", "4d", "5e"]),
+        ((b, a, lambda a, b: str(a) + str(b)), ["a1", "b2", "c3", "d4", "e5"]),
+        ((b, lstzip(a, b, lambda a, b: a * ord(b[0])), lambda a, b: str(a) + str(b)), ["a97", "b196", "c297", "d400", "e505"]),
+    ))
+    test(lstzip_2, (
         ((a, b, lambda a, b: str(a) + str(b)), ["1a", "2b", "3c", "4d", "5e"]),
         ((b, a, lambda a, b: str(a) + str(b)), ["a1", "b2", "c3", "d4", "e5"]),
         ((b, lstzip(a, b, lambda a, b: a * ord(b[0])), lambda a, b: str(a) + str(b)), ["a97", "b196", "c297", "d400", "e505"]),
